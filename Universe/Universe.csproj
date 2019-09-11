@@ -42,9 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AstronomicalObject.cs" />
+    <Compile Include="IAstronomicalObject.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpeedOfBody.cs" />
+    <Compile Include="SpeedVector.cs" />
     <Compile Include="SystemOfBody.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

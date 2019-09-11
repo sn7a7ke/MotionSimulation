@@ -9,22 +9,21 @@ namespace Universe
     /// <summary>
     /// Time - seconds, Distance - kilometers
     /// </summary>
-    class AstronomicalObject
+    public class AstronomicalObject : IAstronomicalObject
     {
-        public Position Position { get; protected set; }
+        public string Name { get; set; }
+        public double Mass { get; set; }
+        public double Radius { get; set; }
 
-        public double Mass { get; protected set; }
+        public Position Position { get; set; }
 
-        public double Radius { get; protected set; }
+        public SpeedVector SpeedVector { get; set; }
 
-        public SpeedOfBody Speed { get; protected set; }
-
-        public string Name { get; protected set; }
 
         public void Move()
         {
-            Position.X += Speed.DeltaX;
-            Position.Y += Speed.DeltaY;
+            Position.X += SpeedVector.ProjectionOnX;
+            Position.Y += SpeedVector.ProjectionOnY;
         }
     }
 }
