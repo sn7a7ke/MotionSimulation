@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Universe
 {
@@ -27,6 +23,5 @@ namespace Universe
         }
 
         public static double Length(double x, double y) => Math.Sqrt(x * x + y * y);
-
     }
 }

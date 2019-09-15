@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Universe
 {
     public class SystemOfBody
     {
-        public const double GravitationalConstant = 0.000000000066743;
+        public const double GravitationalConstant = 6.6743E-11;
 
         public SystemOfBody()
         {
@@ -35,7 +31,8 @@ namespace Universe
                 return;
             Bodies.Add(obj);
         }
-        public void Step()
+
+        public void DoStep()
         {
             Interaction();
             Move();
@@ -46,6 +43,38 @@ namespace Universe
             var length = Position.Distance(obj1.Position, obj2.Position);
             var power = GravitationalConstant * obj1.Mass * obj2.Mass / (length * length); // (mass/length) ???
             return power;
+        }
+
+        public Position MassCenter()
+        {
+            double dx = 0;
+            double dy = 0;
+            double dm = 0;
+            for (int i = 0; i < Count; i++)
+            {
+                dx += Bodies[i].Position.X * Bodies[i].Mass;
+                dy += Bodies[i].Position.Y * Bodies[i].Mass;
+                dm += Bodies[i].Mass;
+            }
+            dx = dx / dm;
+            dy = dy / dm;
+            return new Position(dx, dy);
+        }
+
+        public SpeedVector MassSpeedVector()
+        {
+            double dx = 0;
+            double dy = 0;
+            double dm = 0;
+            for (int i = 0; i < Count; i++)
+            {
+                dx += Bodies[i].SpeedVector.ProjectionOnX * Bodies[i].Mass;
+                dy += Bodies[i].SpeedVector.ProjectionOnY * Bodies[i].Mass;
+                dm += Bodies[i].Mass;
+            }
+            dx = dx / dm;
+            dy = dy / dm;
+            return new SpeedVector(dx, dy);
         }
 
         private void Move()
@@ -81,9 +110,8 @@ namespace Universe
 
         private SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-
-            var dx = obj1.Position.X - obj2.Position.X;
-            var dy = obj1.Position.Y - obj2.Position.Y;
+            var dx = obj2.Position.X - obj1.Position.X;
+            var dy = obj2.Position.Y - obj1.Position.Y;
             var length = Position.Distance(obj1.Position, obj2.Position);
             var nv = new SpeedVector(dx / length, dy / length);
             return nv;
