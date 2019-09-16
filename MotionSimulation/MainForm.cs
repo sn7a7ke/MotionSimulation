@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading;
+using System.Windows.Forms;
 using Universe;
 
 namespace MotionSimulation
@@ -32,7 +33,7 @@ namespace MotionSimulation
             _system.AddBody(Moon);
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
 
-            var timer = new System.Threading.Timer(CallBack, null, 0, 1000);
+            var timer = new System.Threading.Timer(CallBack, null, 0, 200);
         }
 
         private void CallBack(object obj)

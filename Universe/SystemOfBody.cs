@@ -41,7 +41,7 @@ namespace Universe
         public double AttractivePower(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var length = Position.Distance(obj1.Position, obj2.Position);
-            var power = GravitationalConstant * obj1.Mass * obj2.Mass / (length * length); // (mass/length) ???
+            var power = GravitationalConstant * (obj1.Mass / length) * (obj2.Mass / length); // (mass/length) ???
             return power;
         }
 
@@ -85,27 +85,21 @@ namespace Universe
 
         private void Interaction()
         {
-            if (Count < 2)
-                return;
-            SpeedVector speedVector;
-            SpeedVector reverseSpeedVector;
+            //if (Count < 2)
+            //    return;
             for (int i = 0; i < Count - 1; i++)
                 for (int j = 1; j < Count; j++)
-                {
-                    speedVector = AccelerationVector(Bodies[i], Bodies[j]);
-                    Bodies[i].SpeedVector.Add(speedVector);
-                    reverseSpeedVector = AccelerationVector(Bodies[j], Bodies[i]);
-                    Bodies[j].SpeedVector.Add(speedVector);
-                }
+                    ChangeAccelerationVectors(Bodies[i], Bodies[j]);
         }
 
-        private SpeedVector AccelerationVector(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        private void ChangeAccelerationVectors(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var normalVector = NormalVectorFromFirstToSecondBody(obj1, obj2);
             var power = AttractivePower(obj1, obj2);
-            var dx = obj1.SpeedVector.ProjectionOnX * power / obj1.Mass;
-            var dy = obj1.SpeedVector.ProjectionOnY * power / obj1.Mass;
-            return new SpeedVector(dx, dy);
+            var dx = normalVector.ProjectionOnX * power;
+            var dy = normalVector.ProjectionOnY * power;
+            obj1.SpeedVector.Add(dx / obj1.Mass, dy / obj1.Mass);
+            obj1.SpeedVector.Add( - dx / obj2.Mass, - dy / obj2.Mass);
         }
 
         private SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)

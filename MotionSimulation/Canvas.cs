@@ -61,6 +61,7 @@ namespace MotionSimulation
         {
             MainBmp = new Bitmap(Width, Height);
             Graph = Graphics.FromImage(MainBmp);
+            Graph.DrawEllipse(Pen, -84, -84, 768, 768);
         }
 
         public Scale GetEstimateScale()

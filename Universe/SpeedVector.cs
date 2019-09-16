@@ -18,8 +18,13 @@ namespace Universe
 
         public void Add(SpeedVector sv)
         {
-            ProjectionOnX += sv.ProjectionOnX;
-            ProjectionOnY += sv.ProjectionOnY;
+            Add(sv.ProjectionOnX, sv.ProjectionOnY);
+        }
+
+        public void Add(double dx, double dy)
+        {
+            ProjectionOnX += dx;
+            ProjectionOnY += dy;
         }
 
         public static double Length(double x, double y) => Math.Sqrt(x * x + y * y);
