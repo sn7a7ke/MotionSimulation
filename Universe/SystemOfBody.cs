@@ -95,11 +95,12 @@ namespace Universe
         private void ChangeAccelerationVectors(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var normalVector = NormalVectorFromFirstToSecondBody(obj1, obj2);
-            var power = AttractivePower(obj1, obj2);
-            var dx = normalVector.ProjectionOnX * power;
-            var dy = normalVector.ProjectionOnY * power;
-            obj1.SpeedVector.Add(dx / obj1.Mass, dy / obj1.Mass);
-            obj1.SpeedVector.Add( - dx / obj2.Mass, - dy / obj2.Mass);
+            var length = Position.Distance(obj1.Position, obj2.Position);
+            var lengthSquare = length * length;
+            var power1 = GravitationalConstant * obj2.Mass / lengthSquare;
+            var power2 = - GravitationalConstant * obj1.Mass / lengthSquare;
+            obj1.SpeedVector.Add(power1 * normalVector.ProjectionOnX, power1 * normalVector.ProjectionOnY);
+            obj2.SpeedVector.Add(power2 * normalVector.ProjectionOnX, power2 * normalVector.ProjectionOnY);
         }
 
         private SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)

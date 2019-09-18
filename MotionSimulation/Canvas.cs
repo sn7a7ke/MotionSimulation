@@ -16,6 +16,8 @@ namespace MotionSimulation
         public Scale Scale { get; set; }
         public Point Center { get; set; }
 
+        public int NumberOfSteps { get; private set; }
+
         public Canvas(int width, int height, SystemOfBody systemOfBody)
         {
             if (width < 0 || height < 0)
@@ -27,11 +29,15 @@ namespace MotionSimulation
             Scale = GetEstimateScale();
             Center = GetCenter();
             Pen = new Pen(Color.DarkRed);
+            MainBmp = new Bitmap(Width, Height);
+            Graph = Graphics.FromImage(MainBmp);
             Clear();
+            NumberOfSteps = 0;
         }
 
         public void DoStep()
         {
+            NumberOfSteps++;
             for (int i = 0; i < Scale.Time; i++)
                 SystemOfBody.DoStep();
             Refresh();
@@ -39,14 +45,18 @@ namespace MotionSimulation
 
         public void Refresh()
         {
-            Clear();
+            //Clear();
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
         }
 
         public void DrawBody(IAstronomicalObject obj)
         {
-            Graph.DrawEllipse(Pen, GetSquare(obj));
+            var dx = (int)(obj.Position.X / Scale.Length);
+            var dy = (int)(obj.Position.Y / Scale.Length);
+            if (dx > 0 && dy > 0 && dx < Width && dy < Height)
+                MainBmp.SetPixel(dx, dy, Color.Bisque);
+            //Graph.DrawEllipse(Pen, GetSquare(obj));
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)
@@ -59,14 +69,13 @@ namespace MotionSimulation
 
         private void Clear()
         {
-            MainBmp = new Bitmap(Width, Height);
-            Graph = Graphics.FromImage(MainBmp);
+            Graph.Clear(Color.Black);
             Graph.DrawEllipse(Pen, -84, -84, 768, 768);
         }
 
         public Scale GetEstimateScale()
         {
-            return new Scale(1E6, 60*60);
+            return new Scale(1E6, 60 * 60);
         }
 
         public Point GetCenter()
