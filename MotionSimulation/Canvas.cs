@@ -28,7 +28,7 @@ namespace MotionSimulation
 
             Scale = GetEstimateScale();
             Center = GetCenter();
-            Pen = new Pen(Color.DarkRed);
+            Pen = new Pen(Color.White);
             MainBmp = new Bitmap(Width, Height);
             Graph = Graphics.FromImage(MainBmp);
             Clear();
@@ -63,7 +63,7 @@ namespace MotionSimulation
         {
             var leftTopX = (int)((obj.Position.X - obj.Radius) / Scale.Length);
             var leftTopY = (int)((obj.Position.Y - obj.Radius) / Scale.Length);
-            var size = (int)(2 * obj.Radius / Scale.Length);
+            var size = (int)(4 * obj.Radius / Scale.Length);
             if (size < 1)
                 size = 1;
             return new Rectangle(leftTopX, leftTopY, size, size);
@@ -77,7 +77,7 @@ namespace MotionSimulation
 
         public Scale GetEstimateScale()
         {
-            return new Scale(1E6, 60 * 60);
+            return new Scale(2E6, 60 * 60);
         }
 
         public Point GetCenter()
