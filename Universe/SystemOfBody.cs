@@ -88,7 +88,7 @@ namespace Universe
             //if (Count < 2)
             //    return;
             for (int i = 0; i < Count - 1; i++)
-                for (int j = 1; j < Count; j++)
+                for (int j = i + 1; j < Count; j++)
                     ChangeAccelerationVectors(Bodies[i], Bodies[j]);
         }
 

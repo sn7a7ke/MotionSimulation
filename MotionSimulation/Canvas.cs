@@ -45,18 +45,18 @@ namespace MotionSimulation
 
         public void Refresh()
         {
-            //Clear();
+            Clear();
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
         }
 
         public void DrawBody(IAstronomicalObject obj)
         {
-            var dx = (int)(obj.Position.X / Scale.Length);
-            var dy = (int)(obj.Position.Y / Scale.Length);
-            if (dx > 0 && dy > 0 && dx < Width && dy < Height)
-                MainBmp.SetPixel(dx, dy, Color.Bisque);
-            //Graph.DrawEllipse(Pen, GetSquare(obj));
+            //var dx = (int)(obj.Position.X / Scale.Length);
+            //var dy = (int)(obj.Position.Y / Scale.Length);
+            //if (dx > 0 && dy > 0 && dx < Width && dy < Height)
+            //    MainBmp.SetPixel(dx, dy, Color.Bisque);
+            Graph.DrawEllipse(Pen, GetSquare(obj));
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)
@@ -64,13 +64,15 @@ namespace MotionSimulation
             var leftTopX = (int)((obj.Position.X - obj.Radius) / Scale.Length);
             var leftTopY = (int)((obj.Position.Y - obj.Radius) / Scale.Length);
             var size = (int)(2 * obj.Radius / Scale.Length);
+            if (size < 1)
+                size = 1;
             return new Rectangle(leftTopX, leftTopY, size, size);
         }
 
         private void Clear()
         {
             Graph.Clear(Color.Black);
-            Graph.DrawEllipse(Pen, -84, -84, 768, 768);
+            //Graph.DrawEllipse(Pen, -84, -84, 768, 768);
         }
 
         public Scale GetEstimateScale()

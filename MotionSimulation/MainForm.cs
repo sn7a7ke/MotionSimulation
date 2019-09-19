@@ -29,12 +29,21 @@ namespace MotionSimulation
                 Position = new Position(6.84467E8, 3E8),
                 SpeedVector = new SpeedVector(0, 1000)
             };
+            var Asteroid = new AstronomicalObject
+            {
+                Name = "Asteroid",
+                Mass = 5E8,
+                Radius = 1E3,
+                Position = new Position(7.84467E8, 6E8),
+                SpeedVector = new SpeedVector(-1000, -800)
+            };
             _system = new SystemOfBody();
             _system.AddBody(Earth);
             _system.AddBody(Moon);
+            _system.AddBody(Asteroid);
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
 
-            timer1.Interval = 20;
+            timer1.Interval = 25;
             timer1.Start();
         }
 
