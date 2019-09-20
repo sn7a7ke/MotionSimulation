@@ -8,13 +8,15 @@ namespace MotionSimulation
 {
     public class Scale
     {
-        public double Length { get; private set; }
-        public double Time { get; private set; }
+        public double Length { get; set; }
+        public double Time { get; set; }
+        public double Radius { get; set; }
 
-        public Scale(double length, double time)
+        public Scale(double length, double time, double radius = 1)
         {
             Length = length;
             Time = time;
+            Radius = radius;
         }
     }
 }

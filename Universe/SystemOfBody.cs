@@ -61,6 +61,18 @@ namespace Universe
             return new Position(dx, dy);
         }
 
+        public void TransferMassCenter(double x, double y)
+        {
+            Position massCenter = MassCenter();
+            var dx = x - massCenter.X;
+            var dy = y - massCenter.Y;
+            for (int i = 0; i < Count; i++)
+            {
+                Bodies[i].Position.X += dx;
+                Bodies[i].Position.Y += dy;
+            }
+        }
+
         public SpeedVector MassSpeedVector()
         {
             double dx = 0;

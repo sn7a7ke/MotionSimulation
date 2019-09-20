@@ -63,7 +63,7 @@ namespace MotionSimulation
         {
             var leftTopX = (int)((obj.Position.X - obj.Radius) / Scale.Length);
             var leftTopY = (int)((obj.Position.Y - obj.Radius) / Scale.Length);
-            var size = (int)(4 * obj.Radius / Scale.Length);
+            var size = (int)(2 * Scale.Radius * obj.Radius / Scale.Length);
             if (size < 1)
                 size = 1;
             return new Rectangle(leftTopX, leftTopY, size, size);
@@ -77,7 +77,17 @@ namespace MotionSimulation
 
         public Scale GetEstimateScale()
         {
-            return new Scale(2E6, 60 * 60);
+            return new Scale(1E6, 60 * 60, 1);
+        }
+
+        public void TransferMassCenter()
+        {
+            TransferMassCenter(Width / 2, Height / 2);
+        }
+
+        public void TransferMassCenter(int x, int y)
+        {
+            SystemOfBody.TransferMassCenter(x * Scale.Length, y * Scale.Length);
         }
 
         public Point GetCenter()
