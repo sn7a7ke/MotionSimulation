@@ -8,8 +8,6 @@ namespace MotionSimulation
     {
         private SystemOfBody _system;
         private Canvas _canvas;
-        private Scale _scale;
-        private bool _start;
         private const int timerInterval = 40;
         public MainForm()
         {
@@ -43,57 +41,72 @@ namespace MotionSimulation
             _system.AddBody(Earth);
             _system.AddBody(Moon);
             _system.AddBody(Asteroid);
-
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
-            _scale = _canvas.GetEstimateScale();
+            _canvas.Scale.Length = (double)nUD_Length.Value;
+            _canvas.Scale.Time = (double)(nUD_Time.Value / timerInterval);
 
             _canvas.Refresh();
-            FillForm();
+            FillInForm();
 
-            _start = false;
             timer1.Interval = timerInterval;
         }
 
-        private void timer1_Tick(object sender, System.EventArgs e)
-        {
-            _canvas.Scale = _scale;
-            _canvas.TransferMassCenter();
-            _canvas.DoStep();
-            FillForm();
-        }
 
-        private void FillForm()
+        private void FillInForm()
         {
             pb_Universe.Image = _canvas.MainBmp;
-            label1.Text = (_canvas.NumberOfSteps / 730).ToString() + " m " + (_canvas.NumberOfSteps % 730 / 24).ToString() + " d " + (_canvas.NumberOfSteps % 24).ToString() + " h";
-            label2.Text = (_canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].SpeedVector.Speed / 1000).ToString("0.00") + " km/s";
-            label3.Text = (Position.Distance(_canvas.SystemOfBody[0].Position, _canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].Position) / 1E6).ToString("#") + " Kkm";
+            lbl_Info.Text = "From start: " + GetDateFromHours(_canvas.NumberOfSteps) + "\n" +
+                "Asteroid speed: " + GetSpeedInKilometersPerSecond(_canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].SpeedVector.Speed) + "\n" +
+                "Distance to asteroid: " + GetDistanceInKilometers(_canvas.SystemOfBody[0].Position, _canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].Position);
+        }
+
+        private string GetSpeedInKilometersPerSecond(double speed)
+        {
+            return (speed / 1000).ToString("0.00") + " km/s";
+        }
+
+        private string GetDistanceInKilometers(Position pos1, Position pos2)
+        {
+            return (Position.Distance(pos1, pos2) / 1E6).ToString("#") + " Kkm";
+        }
+
+        private string GetDateFromHours(int hours)
+        {
+            return (hours / 730).ToString("0") + " m " + 
+                    (hours % 730 / 24).ToString("00") + " d " + 
+                    (hours % 24).ToString("00") + " h";
+        }
+
+
+        private void timer1_Tick(object sender, System.EventArgs e)
+        {
+            _canvas.TransferMassCenter();
+            _canvas.DoStep();
+            FillInForm();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-            if (_start)
+            if (timer1.Enabled)
             {
                 timer1.Stop();
                 button1.Text = "Start";
-                _start = false;
             }
             else
             {
                 timer1.Start();
                 button1.Text = "Stop";
-                _start = true;
             }
         }
 
         private void nUD_Length_ValueChanged(object sender, System.EventArgs e)
         {
-            _scale.Length = (double)nUD_Length.Value;
+            _canvas.Scale.Length = (double)nUD_Length.Value;
         }
 
         private void nUD_Time_ValueChanged(object sender, System.EventArgs e)
         {
-            _scale.Time = (double)(nUD_Time.Value / timerInterval);
+            _canvas.Scale.Time = (double)(nUD_Time.Value / timerInterval);
         }
     }
 }

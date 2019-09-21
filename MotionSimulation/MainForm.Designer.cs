@@ -32,11 +32,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pb_Universe = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_Info = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.nUD_Length = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -75,29 +73,19 @@
             this.pb_Universe.TabIndex = 2;
             this.pb_Universe.TabStop = false;
             // 
-            // label1
+            // lbl_Info
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1038, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
+            this.lbl_Info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_Info.AutoSize = true;
+            this.lbl_Info.Location = new System.Drawing.Point(1038, 36);
+            this.lbl_Info.Name = "lbl_Info";
+            this.lbl_Info.Size = new System.Drawing.Size(35, 13);
+            this.lbl_Info.TabIndex = 3;
+            this.lbl_Info.Text = "label1";
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1039, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
             // 
             // button1
             // 
@@ -109,15 +97,6 @@
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1039, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "label3";
             // 
             // nUD_Length
             // 
@@ -139,6 +118,7 @@
             0,
             0});
             this.nUD_Length.Name = "nUD_Length";
+            this.nUD_Length.ReadOnly = true;
             this.nUD_Length.Size = new System.Drawing.Size(88, 20);
             this.nUD_Length.TabIndex = 7;
             this.nUD_Length.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -201,13 +181,14 @@
             0,
             0});
             this.nUD_Time.Name = "nUD_Time";
+            this.nUD_Time.ReadOnly = true;
             this.nUD_Time.Size = new System.Drawing.Size(88, 20);
             this.nUD_Time.TabIndex = 11;
             this.nUD_Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nUD_Time.ThousandsSeparator = true;
             this.nUD_Time.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nUD_Time.Value = new decimal(new int[] {
-            90000,
+            100000,
             0,
             0,
             0});
@@ -223,10 +204,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nUD_Length);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_Info);
             this.Controls.Add(this.pb_Universe);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -248,11 +227,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.PictureBox pb_Universe;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_Info;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nUD_Length;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

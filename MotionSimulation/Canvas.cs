@@ -6,6 +6,8 @@ namespace MotionSimulation
 {
     public class Canvas
     {
+        private Scale _scale;
+
         public int Width { get; private set; }
         public int Height { get; private set; }
         public Pen Pen { get; private set; }
@@ -27,6 +29,7 @@ namespace MotionSimulation
             SystemOfBody = systemOfBody ?? throw new ArgumentNullException(nameof(systemOfBody));
 
             Scale = GetEstimateScale();
+            _scale = Scale;
             Center = GetCenter();
             Pen = new Pen(Color.White);
             MainBmp = new Bitmap(Width, Height);
@@ -38,7 +41,8 @@ namespace MotionSimulation
         public void DoStep()
         {
             NumberOfSteps++;
-            for (int i = 0; i < Scale.Time; i++)
+            _scale = Scale;
+            for (int i = 0; i < _scale.Time; i++)
                 SystemOfBody.DoStep();
             Refresh();
         }
@@ -46,24 +50,21 @@ namespace MotionSimulation
         public void Refresh()
         {
             Clear();
+            _scale = Scale;
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
         }
 
-        public void DrawBody(IAstronomicalObject obj)
+        private void DrawBody(IAstronomicalObject obj)
         {
-            //var dx = (int)(obj.Position.X / Scale.Length);
-            //var dy = (int)(obj.Position.Y / Scale.Length);
-            //if (dx > 0 && dy > 0 && dx < Width && dy < Height)
-            //    MainBmp.SetPixel(dx, dy, Color.Bisque);
             Graph.DrawEllipse(Pen, GetSquare(obj));
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)
         {
-            var leftTopX = (int)((obj.Position.X - obj.Radius) / Scale.Length);
-            var leftTopY = (int)((obj.Position.Y - obj.Radius) / Scale.Length);
-            var size = (int)(2 * Scale.Radius * obj.Radius / Scale.Length);
+            var leftTopX = (int)((obj.Position.X - obj.Radius) / _scale.Length);
+            var leftTopY = (int)((obj.Position.Y - obj.Radius) / _scale.Length);
+            var size = (int)(2 * _scale.Radius * obj.Radius / _scale.Length);
             if (size < 1)
                 size = 1;
             return new Rectangle(leftTopX, leftTopY, size, size);
@@ -72,7 +73,6 @@ namespace MotionSimulation
         private void Clear()
         {
             Graph.Clear(Color.Black);
-            //Graph.DrawEllipse(Pen, -84, -84, 768, 768);
         }
 
         public Scale GetEstimateScale()
@@ -87,31 +87,21 @@ namespace MotionSimulation
 
         public void TransferMassCenter(int x, int y)
         {
-            SystemOfBody.TransferMassCenter(x * Scale.Length, y * Scale.Length);
+            SystemOfBody.TransferMassCenter(x * _scale.Length, y * _scale.Length);
         }
 
         public Point GetCenter()
         {
-            int cX;
-            int cY;
             var speedVector = SystemOfBody.MassSpeedVector();
-            var dx = speedVector.ProjectionOnX / Scale.Length;
-            var dy = speedVector.ProjectionOnY / Scale.Length;
-            var center = SystemOfBody.MassCenter();
+            var dx = speedVector.ProjectionOnX / _scale.Length;
+            var dy = speedVector.ProjectionOnY / _scale.Length;
             var stepX = Width / dx;
             var stepY = Height / dy;
 
             if (stepX > stepY)
-            {
-                cX = 0;
-                cY = (int)((stepX - stepY) * dx / 2);
-            }
+                return new Point(0, (int)((stepX - stepY) * dx / 2));
             else
-            {
-                cX = (int)((stepY - stepX) * dy / 2);
-                cY = 0;
-            }
-            return new Point(cX, cY);
+                return new Point((int)((stepY - stepX) * dy / 2), 0);                
         }
     }
 }
