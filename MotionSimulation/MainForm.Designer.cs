@@ -171,7 +171,7 @@
             0});
             this.nUD_Time.Location = new System.Drawing.Point(1084, 764);
             this.nUD_Time.Maximum = new decimal(new int[] {
-            500000,
+            1000000,
             0,
             0,
             0});

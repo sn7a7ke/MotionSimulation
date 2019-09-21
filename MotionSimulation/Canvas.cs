@@ -18,7 +18,7 @@ namespace MotionSimulation
         public Scale Scale { get; set; }
         public Point Center { get; set; }
 
-        public int NumberOfSteps { get; private set; }
+        public int SecondsFromStart { get; private set; }
 
         public Canvas(int width, int height, SystemOfBody systemOfBody)
         {
@@ -30,17 +30,18 @@ namespace MotionSimulation
 
             Scale = GetEstimateScale();
             _scale = Scale;
-            Center = GetCenter();
+            var center = SystemOfBody.MassCenter();
+            Center = new Point((int)(center.X / _scale.Length), (int)(center.X / _scale.Length));
             Pen = new Pen(Color.White);
             MainBmp = new Bitmap(Width, Height);
             Graph = Graphics.FromImage(MainBmp);
             Clear();
-            NumberOfSteps = 0;
+            SecondsFromStart = 0;
         }
 
         public void DoStep()
         {
-            NumberOfSteps++;
+            SecondsFromStart += _scale.Time;
             _scale = Scale;
             for (int i = 0; i < _scale.Time; i++)
                 SystemOfBody.DoStep();
@@ -51,6 +52,7 @@ namespace MotionSimulation
         {
             Clear();
             _scale = Scale;
+            TransferMassCenter(Center.X, Center.Y);
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
         }
