@@ -11,7 +11,7 @@ namespace MotionSimulation
         private const int timerInterval = 40;
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();  
 
             var Earth = new AstronomicalObject
             {
