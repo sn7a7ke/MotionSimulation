@@ -31,7 +31,7 @@ namespace MotionSimulation
             Scale = GetEstimateScale();
             _scale = Scale;
             var center = SystemOfBody.MassCenter();
-            Center = new Point((int)(center.X / _scale.Length), (int)(center.X / _scale.Length));
+            Center = new Point((int)(center.X / _scale.Length), (int)(center.Y / _scale.Length));
             Pen = new Pen(Color.White);
             MainBmp = new Bitmap(Width, Height);
             Graph = Graphics.FromImage(MainBmp);
@@ -84,6 +84,7 @@ namespace MotionSimulation
 
         public void TransferMassCenter()
         {
+            Center = new Point(Width / 2, Height / 2);
             TransferMassCenter(Width / 2, Height / 2);
         }
 

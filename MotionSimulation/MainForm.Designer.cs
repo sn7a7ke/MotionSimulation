@@ -40,6 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.nUD_Time = new System.Windows.Forms.NumericUpDown();
+            this.btn_ToCenter = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).BeginInit();
@@ -194,11 +196,24 @@
             0});
             this.nUD_Time.ValueChanged += new System.EventHandler(this.nUD_Time_ValueChanged);
             // 
+            // btn_ToCenter
+            // 
+            this.btn_ToCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ToCenter.Location = new System.Drawing.Point(1084, 672);
+            this.btn_ToCenter.Name = "btn_ToCenter";
+            this.btn_ToCenter.Size = new System.Drawing.Size(88, 26);
+            this.btn_ToCenter.TabIndex = 12;
+            this.btn_ToCenter.Text = "To center";
+            this.toolTip1.SetToolTip(this.btn_ToCenter, "Move the Mass center to the center window");
+            this.btn_ToCenter.UseVisualStyleBackColor = true;
+            this.btn_ToCenter.Click += new System.EventHandler(this.btn_ToCenter_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
+            this.Controls.Add(this.btn_ToCenter);
             this.Controls.Add(this.nUD_Time);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -235,6 +250,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nUD_Time;
+        private System.Windows.Forms.Button btn_ToCenter;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

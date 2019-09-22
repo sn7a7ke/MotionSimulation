@@ -104,11 +104,20 @@ namespace MotionSimulation
         private void nUD_Length_ValueChanged(object sender, System.EventArgs e)
         {
             _canvas.Scale.Length = (double)nUD_Length.Value;
+            _canvas.Refresh();
+            FillInForm();
         }
 
         private void nUD_Time_ValueChanged(object sender, System.EventArgs e)
         {
             _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
+        }
+
+        private void btn_ToCenter_Click(object sender, System.EventArgs e)
+        {
+            _canvas.TransferMassCenter();
+            _canvas.Refresh();
+            FillInForm();
         }
     }
 }
