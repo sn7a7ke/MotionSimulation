@@ -83,6 +83,8 @@ namespace MotionSimulation
 
             Graph.FillEllipse(brush, myRectangle);
             Graph.DrawEllipse(Pen, myRectangle);
+            path.Dispose();
+            brush.Dispose();
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)
@@ -157,10 +159,11 @@ namespace MotionSimulation
         {
             if (!File.Exists(wav))
                 return;
-            System.Media.SoundPlayer sp2 = new System.Media.SoundPlayer();
-            sp2.SoundLocation = wav;
-            sp2.Load();
-            sp2.Play();
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+            sp.SoundLocation = wav;
+            sp.Load();
+            sp.Play();
+            sp.Dispose();
         }
     }
 }
