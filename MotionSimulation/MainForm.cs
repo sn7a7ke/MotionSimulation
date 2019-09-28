@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using Universe;
 
@@ -125,6 +126,11 @@ namespace MotionSimulation
         {
             _canvas.Width = pb_Universe.Width;
             _canvas.Height = pb_Universe.Height;
+        }
+
+        private void pb_Universe_MouseMove(object sender, MouseEventArgs e)
+        {
+            toolStripStatusLabel1.Text = string.Format("{0}:{1}", e.X, e.Y);
         }
 
         //pb_Universe.CreateGraphics

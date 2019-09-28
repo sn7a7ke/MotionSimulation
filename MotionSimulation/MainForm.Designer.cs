@@ -43,6 +43,8 @@
             this.nUD_Time = new System.Windows.Forms.NumericUpDown();
             this.btn_ToCenter = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).BeginInit();
@@ -50,6 +52,8 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 840);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1184, 22);
@@ -77,6 +81,7 @@
             this.pb_Universe.Size = new System.Drawing.Size(1032, 810);
             this.pb_Universe.TabIndex = 2;
             this.pb_Universe.TabStop = false;
+            this.pb_Universe.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_Universe_MouseMove);
             this.pb_Universe.Resize += new System.EventHandler(this.pb_Universe_Resize);
             // 
             // lbl_Info
@@ -212,6 +217,12 @@
             this.btn_ToCenter.UseVisualStyleBackColor = true;
             this.btn_ToCenter.Click += new System.EventHandler(this.btn_ToCenter_Click);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = ".";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,6 +243,8 @@
             this.MinimumSize = new System.Drawing.Size(800, 640);
             this.Name = "MainForm";
             this.Text = "Simulation of motion";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).EndInit();
@@ -255,6 +268,7 @@
         private System.Windows.Forms.NumericUpDown nUD_Time;
         private System.Windows.Forms.Button btn_ToCenter;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
