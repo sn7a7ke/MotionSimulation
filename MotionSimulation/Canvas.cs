@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using Universe;
 
 namespace MotionSimulation
@@ -48,7 +49,8 @@ namespace MotionSimulation
             SecondsFromStart += _scale.Time;
             _scale = Scale;
             for (int i = 0; i < _scale.Time; i++)
-                SystemOfBody.DoStep();
+                if (SystemOfBody.DoStep())
+                    Bang();
             Refresh();
         }
 
@@ -131,6 +133,34 @@ namespace MotionSimulation
                 return new Point(0, (int)((stepX - stepY) * dx / 2));
             else
                 return new Point((int)((stepY - stepX) * dy / 2), 0);                
+        }
+        public bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
+        {
+            var secondSpeed = SystemOfBody.SecondSpaceVelocity(bigObj, smallObj);
+            var check = smallObj.SpeedVector.Speed >= secondSpeed;
+            if (check)
+                Abandoned();
+            return check;
+        }
+
+        private void Bang()
+        {
+            PlayWavFile("Bang.wav");
+        }
+
+        private void Abandoned()
+        {
+            PlayWavFile("Funeral.wav");
+        }
+
+        private static void PlayWavFile(string wav)
+        {
+            if (!File.Exists(wav))
+                return;
+            System.Media.SoundPlayer sp2 = new System.Media.SoundPlayer();
+            sp2.SoundLocation = wav;
+            sp2.Load();
+            sp2.Play();
         }
     }
 }

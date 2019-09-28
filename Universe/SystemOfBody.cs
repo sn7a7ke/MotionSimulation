@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -36,11 +37,11 @@ namespace Universe
             Bodies.Add(obj);
         }
 
-        public void DoStep()
+        public bool DoStep()
         {
             Interaction();
             Move();
-            CheckCollision();
+            return CheckCollision();
         }
 
         public double AttractivePower(IAstronomicalObject obj1, IAstronomicalObject obj2)
@@ -151,8 +152,6 @@ namespace Universe
 
         private void Collison(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-            Bang();
-
             var after = CollisonProcess.Run(obj1, obj2);
             if (after.Item1 == null)
                 Bodies.Remove(obj1);
@@ -164,15 +163,17 @@ namespace Universe
                 Bodies[Bodies.IndexOf(Bodies.Where(n => n.Name == obj2.Name).FirstOrDefault())] = after.Item2;
         }
 
-        private void Bang()
+        public double FirstSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
         {
-            var wav = "Bang.wav";
-            if (!File.Exists(wav))
-                return;            
-            System.Media.SoundPlayer sp2 = new System.Media.SoundPlayer();
-            sp2.SoundLocation = wav;
-            sp2.Load();
-            sp2.Play();
+            var distance = Position.Distance(bigObj.Position, smallObj.Position);
+            var firstSpeed = Math.Sqrt(GravitationalConstant * bigObj.Mass / distance);
+            return firstSpeed;
+        }
+
+        public double SecondSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
+        {
+            var secondSpeed = Math.Sqrt(2) * FirstSpaceVelocity(bigObj, smallObj);
+            return secondSpeed;
         }
     }
 }

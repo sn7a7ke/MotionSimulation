@@ -13,7 +13,7 @@ namespace MotionSimulation
         private const int timerInterval = 40;
         public MainForm()
         {
-            InitializeComponent();  
+            InitializeComponent();
 
             var Earth = new AstronomicalObject
             {
@@ -58,7 +58,7 @@ namespace MotionSimulation
         {
             pb_Universe.Image = _canvas.MainBmp;
             lbl_Info.Text = "From start: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
-                "Asteroid:" + "\n" + 
+                "Asteroid:" + "\n" +
                 "   - speed    " + GetSpeedInKilometersPerSecond(_canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].SpeedVector.Speed) + " km/s \n" +
                 "   - distance " + GetDistanceInKilometers(_canvas.SystemOfBody[0].Position, _canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].Position) + " Kkm";
         }
@@ -76,9 +76,9 @@ namespace MotionSimulation
         private string GetDateFromHours(int numberOfSeconds)
         {
             var hours = numberOfSeconds / secondsInHour;
-            return (hours / 8766).ToString("0") + " y " + 
-                    (hours % 8766 / 730).ToString("0") + " m " + 
-                    (hours % 730 / 24).ToString("00") + " d " + 
+            return (hours / 8766).ToString("0") + " y " +
+                    (hours % 8766 / 730).ToString("0") + " m " +
+                    (hours % 730 / 24).ToString("00") + " d " +
                     (hours % 24).ToString("00") + " h";
         }
 
@@ -131,6 +131,11 @@ namespace MotionSimulation
         private void pb_Universe_MouseMove(object sender, MouseEventArgs e)
         {
             toolStripStatusLabel1.Text = string.Format("{0}:{1}", e.X, e.Y);
+        }
+
+        private void btn_IsAbandoned_Click(object sender, EventArgs e)
+        {
+            _canvas.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]);
         }
 
         //pb_Universe.CreateGraphics

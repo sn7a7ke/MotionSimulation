@@ -44,6 +44,7 @@
             this.btn_ToCenter = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btn_IsAbandoned = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
@@ -223,11 +224,22 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
             this.toolStripStatusLabel1.Text = ".";
             // 
+            // btn_IsAbandoned
+            // 
+            this.btn_IsAbandoned.Location = new System.Drawing.Point(1084, 705);
+            this.btn_IsAbandoned.Name = "btn_IsAbandoned";
+            this.btn_IsAbandoned.Size = new System.Drawing.Size(88, 23);
+            this.btn_IsAbandoned.TabIndex = 13;
+            this.btn_IsAbandoned.Text = "Is abandoned";
+            this.btn_IsAbandoned.UseVisualStyleBackColor = true;
+            this.btn_IsAbandoned.Click += new System.EventHandler(this.btn_IsAbandoned_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
+            this.Controls.Add(this.btn_IsAbandoned);
             this.Controls.Add(this.btn_ToCenter);
             this.Controls.Add(this.nUD_Time);
             this.Controls.Add(this.label6);
@@ -269,6 +281,7 @@
         private System.Windows.Forms.Button btn_ToCenter;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button btn_IsAbandoned;
     }
 }
 
