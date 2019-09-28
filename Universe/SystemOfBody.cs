@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Universe
 {
     public class SystemOfBody
     {
         public const double GravitationalConstant = 6.6743E-11;
+        public ICollison CollisonProcess { get; set; }
 
         public SystemOfBody()
         {
             Bodies = new List<IAstronomicalObject>();
+            CollisonProcess = new SimplyCollision();
         }
 
         public List<IAstronomicalObject> Bodies { get; protected set; }
@@ -36,6 +40,7 @@ namespace Universe
         {
             Interaction();
             Move();
+            CheckCollision();
         }
 
         public double AttractivePower(IAstronomicalObject obj1, IAstronomicalObject obj2)
@@ -97,8 +102,6 @@ namespace Universe
 
         private void Interaction()
         {
-            //if (Count < 2)
-            //    return;
             for (int i = 0; i < Count - 1; i++)
                 for (int j = i + 1; j < Count; j++)
                     ChangeAccelerationVectors(Bodies[i], Bodies[j]);
@@ -110,7 +113,7 @@ namespace Universe
             var length = Position.Distance(obj1.Position, obj2.Position);
             var lengthSquare = length * length;
             var power1 = GravitationalConstant * obj2.Mass / lengthSquare;
-            var power2 = - GravitationalConstant * obj1.Mass / lengthSquare;
+            var power2 = -GravitationalConstant * obj1.Mass / lengthSquare;
             obj1.SpeedVector.Add(power1 * normalVector.ProjectionOnX, power1 * normalVector.ProjectionOnY);
             obj2.SpeedVector.Add(power2 * normalVector.ProjectionOnX, power2 * normalVector.ProjectionOnY);
         }
@@ -122,6 +125,54 @@ namespace Universe
             var length = Position.Distance(obj1.Position, obj2.Position);
             var nv = new SpeedVector(dx / length, dy / length);
             return nv;
+        }
+
+        private bool CheckCollision()
+        {
+            // ========= ONLY ONE COLLISION!!! =========
+            for (int i = 0; i < Count - 1; i++)
+                for (int j = i + 1; j < Count; j++)
+                {
+                    if (IsCollision(Bodies[i], Bodies[j]))
+                    {
+                        Collison(Bodies[i], Bodies[j]);
+                        return true;
+                    }
+                }
+            return false;
+        }
+
+        public bool IsCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        {
+            var distance = Position.Distance(obj1.Position, obj2.Position);
+            var twoRadiusSum = obj1.Radius + obj2.Radius;
+            return distance < twoRadiusSum;
+        }
+
+        private void Collison(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        {
+            Bang();
+
+            var after = CollisonProcess.Run(obj1, obj2);
+            if (after.Item1 == null)
+                Bodies.Remove(obj1);
+            else
+                Bodies[Bodies.IndexOf(Bodies.Where(n => n.Name == obj1.Name).FirstOrDefault())] = after.Item1;
+            if (after.Item2 == null)
+                Bodies.Remove(obj2);
+            else
+                Bodies[Bodies.IndexOf(Bodies.Where(n => n.Name == obj2.Name).FirstOrDefault())] = after.Item2;
+        }
+
+        private void Bang()
+        {
+            var wav = "Bang.wav";
+            if (!File.Exists(wav))
+                return;            
+            System.Media.SoundPlayer sp2 = new System.Media.SoundPlayer();
+            sp2.SoundLocation = wav;
+            sp2.Load();
+            sp2.Play();
         }
     }
 }

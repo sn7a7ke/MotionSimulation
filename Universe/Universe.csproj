@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="AstronomicalObject.cs" />
     <Compile Include="IAstronomicalObject.cs" />
+    <Compile Include="ICollison.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimplyCollision.cs" />
     <Compile Include="SpeedVector.cs" />
     <Compile Include="SystemOfBody.cs" />
   </ItemGroup>
