@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pb_Universe = new System.Windows.Forms.PictureBox();
@@ -69,6 +70,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pb_Universe.BackColor = System.Drawing.Color.Black;
+            this.pb_Universe.Image = ((System.Drawing.Image)(resources.GetObject("pb_Universe.Image")));
+            this.pb_Universe.InitialImage = ((System.Drawing.Image)(resources.GetObject("pb_Universe.InitialImage")));
             this.pb_Universe.Location = new System.Drawing.Point(0, 27);
             this.pb_Universe.Name = "pb_Universe";
             this.pb_Universe.Size = new System.Drawing.Size(1032, 810);
