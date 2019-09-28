@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using Universe;
@@ -135,7 +136,10 @@ namespace MotionSimulation
 
         private void btn_IsAbandoned_Click(object sender, EventArgs e)
         {
-            _canvas.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]);
+            if (_canvas.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]))
+                btn_IsAbandoned.ForeColor = Color.Red;
+            else
+                btn_IsAbandoned.ForeColor = Color.ForestGreen;
         }
 
         //pb_Universe.CreateGraphics
