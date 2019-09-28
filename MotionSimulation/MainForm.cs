@@ -42,7 +42,7 @@ namespace MotionSimulation
             _system.AddBody(Earth);
             _system.AddBody(Moon);
             _system.AddBody(Asteroid);
-            _canvas = new Canvas(pb_Universe.Image, _system);
+            _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
             _canvas.Scale.Length = (double)nUD_Length.Value;
             _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
 
@@ -119,5 +119,13 @@ namespace MotionSimulation
             _canvas.Refresh();
             FillInForm();
         }
+
+        private void pb_Universe_Resize(object sender, System.EventArgs e)
+        {
+            _canvas.Width = pb_Universe.Width;
+            _canvas.Height = pb_Universe.Height;
+        }
+
+        //pb_Universe.CreateGraphics
     }
 }

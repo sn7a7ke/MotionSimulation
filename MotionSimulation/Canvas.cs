@@ -8,10 +8,11 @@ namespace MotionSimulation
     public class Canvas
     {
         private Scale _scale;
-        private Image _originalImage;
+        private int _width;
+        private int _height;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public Pen Pen { get; private set; }
         public Bitmap MainBmp { get; private set; }
         public Graphics Graph { get; private set; }
@@ -25,13 +26,12 @@ namespace MotionSimulation
 
         public int SecondsFromStart { get; private set; }
 
-        public Canvas(Image image, SystemOfBody systemOfBody)
+        public Canvas(int width, int height, SystemOfBody systemOfBody)
         {
-            if (image == null)
-                throw new ArgumentNullException(nameof(image));
-            _originalImage = (Image)image.Clone();
-            Width = _originalImage.Width;
-            Height = _originalImage.Height;
+            if (width < 0 || height < 0)
+                throw new ArgumentOutOfRangeException("Sizes of canvas must be positive");
+            Width = width;
+            Height = height;
             SystemOfBody = systemOfBody ?? throw new ArgumentNullException(nameof(systemOfBody));
 
             Scale = GetEstimateScale();
@@ -55,7 +55,6 @@ namespace MotionSimulation
         public void Refresh()
         {
             Clear();
-            _scale = Scale;
             TransferMassCenter(Center.X, Center.Y);
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
@@ -96,7 +95,11 @@ namespace MotionSimulation
 
         private void Clear()
         {
-            MainBmp = new Bitmap(_originalImage);
+            _scale = Scale;
+            _width = Width;
+            _height = Height;
+
+            MainBmp = new Bitmap(_width, _height);
             Graph = Graphics.FromImage(MainBmp);
         }
 
@@ -107,8 +110,8 @@ namespace MotionSimulation
 
         public void TransferMassCenter()
         {
-            Center = new Point(Width / 2, Height / 2);
-            TransferMassCenter(Width / 2, Height / 2);
+            Center = new Point(_width / 2, _height / 2);
+            TransferMassCenter(_width / 2, _height / 2);
         }
 
         public void TransferMassCenter(int x, int y)
@@ -121,8 +124,8 @@ namespace MotionSimulation
             var speedVector = SystemOfBody.MassSpeedVector();
             var dx = speedVector.ProjectionOnX / _scale.Length;
             var dy = speedVector.ProjectionOnY / _scale.Length;
-            var stepX = Width / dx;
-            var stepY = Height / dy;
+            var stepX = _width / dx;
+            var stepY = _height / dy;
 
             if (stepX > stepY)
                 return new Point(0, (int)((stepX - stepY) * dx / 2));
