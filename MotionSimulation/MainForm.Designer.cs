@@ -229,7 +229,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(1200, 900);
+            this.MinimumSize = new System.Drawing.Size(800, 640);
             this.Name = "MainForm";
             this.Text = "Simulation of motion";
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).EndInit();

@@ -57,18 +57,19 @@ namespace MotionSimulation
         {
             pb_Universe.Image = _canvas.MainBmp;
             lbl_Info.Text = "From start: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
-                "Asteroid speed: " + GetSpeedInKilometersPerSecond(_canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].SpeedVector.Speed) + "\n" +
-                "Distance to asteroid: " + GetDistanceInKilometers(_canvas.SystemOfBody[0].Position, _canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].Position);
+                "Asteroid:" + "\n" + 
+                "   - speed    " + GetSpeedInKilometersPerSecond(_canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].SpeedVector.Speed) + " km/s \n" +
+                "   - distance " + GetDistanceInKilometers(_canvas.SystemOfBody[0].Position, _canvas.SystemOfBody.Bodies[_canvas.SystemOfBody.Count - 1].Position) + " Kkm";
         }
 
         private string GetSpeedInKilometersPerSecond(double speed)
         {
-            return (speed / 1000).ToString("0.00") + " km/s";
+            return (speed / 1000).ToString("0.00");
         }
 
         private string GetDistanceInKilometers(Position pos1, Position pos2)
         {
-            return (Position.Distance(pos1, pos2) / 1E6).ToString("#") + " Kkm";
+            return (Position.Distance(pos1, pos2) / 1E6).ToString("# ###");
         }
 
         private string GetDateFromHours(int numberOfSeconds)
