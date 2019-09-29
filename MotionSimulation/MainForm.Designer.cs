@@ -226,6 +226,7 @@
             // 
             // btn_IsAbandoned
             // 
+            this.btn_IsAbandoned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_IsAbandoned.Location = new System.Drawing.Point(1084, 705);
             this.btn_IsAbandoned.Name = "btn_IsAbandoned";
             this.btn_IsAbandoned.Size = new System.Drawing.Size(88, 23);
