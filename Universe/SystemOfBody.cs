@@ -37,6 +37,13 @@ namespace Universe
             Bodies.Add(obj);
         }
 
+        public void RemoveBody(IAstronomicalObject obj)
+        {
+            if (obj == null)
+                return;
+            Bodies.Remove(obj);
+        }
+
         public bool DoStep()
         {
             Interaction();
@@ -154,13 +161,19 @@ namespace Universe
         {
             var after = CollisonProcess.Run(obj1, obj2);
             if (after.Item1 == null)
-                Bodies.Remove(obj1);
+                RemoveBody(obj1);
             else
-                Bodies[Bodies.IndexOf(Bodies.Where(n => n.Name == obj1.Name).FirstOrDefault())] = after.Item1;
+                ReplaceBody(obj1, after.Item1);
             if (after.Item2 == null)
-                Bodies.Remove(obj2);
+                RemoveBody(obj2);
             else
-                Bodies[Bodies.IndexOf(Bodies.Where(n => n.Name == obj2.Name).FirstOrDefault())] = after.Item2;
+                ReplaceBody(obj2, after.Item2);
+        }
+
+        private void ReplaceBody(IAstronomicalObject oldObj, IAstronomicalObject newObj)
+        {
+            var index = Bodies.IndexOf(Bodies.Where(n => n.Name == oldObj.Name).First());
+            Bodies[index] = newObj;
         }
 
         public double FirstSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
