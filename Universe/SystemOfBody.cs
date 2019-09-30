@@ -122,8 +122,8 @@ namespace Universe
             var lengthSquare = length * length;
             var power1 = GravitationalConstant * obj2.Mass / lengthSquare;
             var power2 = -GravitationalConstant * obj1.Mass / lengthSquare;
-            obj1.SpeedVector.Add(power1 * normalVector.ProjectionOnX, power1 * normalVector.ProjectionOnY);
-            obj2.SpeedVector.Add(power2 * normalVector.ProjectionOnX, power2 * normalVector.ProjectionOnY);
+            obj1.SpeedVector.Add(power1 * normalVector);
+            obj2.SpeedVector.Add(power2 * normalVector);
         }
 
         private SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)

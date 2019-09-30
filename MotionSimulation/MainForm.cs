@@ -37,7 +37,7 @@ namespace MotionSimulation
             var Asteroid = new AstronomicalObject
             {
                 Name = "Asteroid",
-                Mass = 5E8,
+                Mass = 5E9,
                 Radius = 1E3,
                 Position = new Position(8.84467E8, 7E8),
                 SpeedVector = new SpeedVector(-1000, -810)
@@ -45,7 +45,7 @@ namespace MotionSimulation
             var Asteroid2 = new AstronomicalObject
             {
                 Name = "Asteroid2",
-                Mass = 5E8,
+                Mass = 5E9,
                 Radius = 1E3,
                 Position = new Position(8.84467E8 + 1E7, 7E8 + 1E7),
                 SpeedVector = new SpeedVector(-1000, -810)
@@ -53,7 +53,7 @@ namespace MotionSimulation
             var Asteroid3 = new AstronomicalObject
             {
                 Name = "Asteroid3",
-                Mass = 5E8,
+                Mass = 5E9,
                 Radius = 1E3,
                 Position = new Position(8.84467E8 + 2E7, 7E8 + 2E7),
                 SpeedVector = new SpeedVector(-1000, -810)
@@ -61,10 +61,26 @@ namespace MotionSimulation
             var Asteroid4 = new AstronomicalObject
             {
                 Name = "Asteroid4",
-                Mass = 5E8,
+                Mass = 5E9,
                 Radius = 1E3,
                 Position = new Position(8.84467E8 + 3E7, 7E8 + 3E7),
                 SpeedVector = new SpeedVector(-1000, -810)
+            };
+            var Asteroid5 = new AstronomicalObject
+            {
+                Name = "Asteroid for Moon",
+                Mass = 5E9,
+                Radius = 1E3,
+                Position = new Position(7.84467E8 + 3E7, 4E8),
+                SpeedVector = new SpeedVector(0, 1023 + 400)
+            };
+            var Asteroid6 = new AstronomicalObject
+            {
+                Name = "Asteroid for Earth",
+                Mass = 5E9,
+                Radius = 1E3,
+                Position = new Position(4E8 + 3E7, 4E8),
+                SpeedVector = new SpeedVector(0, -12.6 + 4000)
             };
 
             _system = new SystemOfBody();
@@ -72,8 +88,10 @@ namespace MotionSimulation
             _system.AddBody(Moon);
             _system.AddBody(Asteroid);
             _system.AddBody(Asteroid2);
-            _system.AddBody(Asteroid3);
-            _system.AddBody(Asteroid4);
+            //_system.AddBody(Asteroid3);
+            //_system.AddBody(Asteroid4);
+            //_system.AddBody(Asteroid5);
+            //_system.AddBody(Asteroid6);
             _mainObject = _system.Bodies[0];
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
             _canvas.Scale.Length = (double)nUD_Length.Value;
@@ -104,7 +122,7 @@ namespace MotionSimulation
         private string GetObjectInfo(IAstronomicalObject obj)
         {
             return $"{obj.Name}:" + "\n" +
-                $"   - speed    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} km/s" +  "\n" +
+                $"   - speed    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} km/s" + "\n" +
                 $"   - distance {GetDistanceInKilometers(_mainObject.Position, obj.Position)} Kkm" + "\n";
         }
 
