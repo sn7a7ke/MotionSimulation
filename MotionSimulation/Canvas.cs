@@ -138,7 +138,7 @@ namespace MotionSimulation
         }
         public bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
         {
-            var secondSpeed = SystemOfBody.SecondSpaceVelocity(bigObj, smallObj);
+            var secondSpeed = Gravity.SecondSpaceVelocity(bigObj, smallObj);
             var check = smallObj.SpeedVector.Speed >= secondSpeed;
             if (check)
                 Abandoned();

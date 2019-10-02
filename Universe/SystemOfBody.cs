@@ -7,7 +7,6 @@ namespace Universe
 {
     public class SystemOfBody
     {
-        public const double GravitationalConstant = 6.6743E-11;
         public ICollison CollisonProcess { get; set; }
 
         public SystemOfBody()
@@ -49,13 +48,6 @@ namespace Universe
             Interaction();
             Move();
             return CheckCollision();
-        }
-
-        public double AttractivePower(IAstronomicalObject obj1, IAstronomicalObject obj2)
-        {
-            var length = Position.Distance(obj1.Position, obj2.Position);
-            var power = GravitationalConstant * (obj1.Mass / length) * (obj2.Mass / length); // (mass/length) ???
-            return power;
         }
 
         public Position MassCenter()
@@ -112,27 +104,7 @@ namespace Universe
         {
             for (int i = 0; i < Count - 1; i++)
                 for (int j = i + 1; j < Count; j++)
-                    ChangeAccelerationVectors(Bodies[i], Bodies[j]);
-        }
-
-        private void ChangeAccelerationVectors(IAstronomicalObject obj1, IAstronomicalObject obj2)
-        {
-            var normalVector = NormalVectorFromFirstToSecondBody(obj1, obj2);
-            var length = Position.Distance(obj1.Position, obj2.Position);
-            var lengthSquare = length * length;
-            var power1 = GravitationalConstant * obj2.Mass / lengthSquare;
-            var power2 = -GravitationalConstant * obj1.Mass / lengthSquare;
-            obj1.SpeedVector.Add(power1 * normalVector);
-            obj2.SpeedVector.Add(power2 * normalVector);
-        }
-
-        private SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
-        {
-            var dx = obj2.Position.X - obj1.Position.X;
-            var dy = obj2.Position.Y - obj1.Position.Y;
-            var length = Position.Distance(obj1.Position, obj2.Position);
-            var nv = new SpeedVector(dx / length, dy / length);
-            return nv;
+                    Gravity.ChangeAccelerationVectors(Bodies[i], Bodies[j]);
         }
 
         private bool CheckCollision()
@@ -141,7 +113,7 @@ namespace Universe
             for (int i = 0; i < Count - 1; i++)
                 for (int j = i + 1; j < Count; j++)
                 {
-                    if (IsCollision(Bodies[i], Bodies[j]))
+                    if (CheckCollision(Bodies[i], Bodies[j]))
                     {
                         Collison(Bodies[i], Bodies[j]);
                         return true;
@@ -150,7 +122,7 @@ namespace Universe
             return false;
         }
 
-        public bool IsCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        public static bool CheckCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var distance = Position.Distance(obj1.Position, obj2.Position);
             var twoRadiusSum = obj1.Radius + obj2.Radius;
@@ -174,19 +146,6 @@ namespace Universe
         {
             var index = Bodies.IndexOf(Bodies.Where(n => n.Name == oldObj.Name).First());
             Bodies[index] = newObj;
-        }
-
-        public double FirstSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
-        {
-            var distance = Position.Distance(bigObj.Position, smallObj.Position);
-            var firstSpeed = Math.Sqrt(GravitationalConstant * bigObj.Mass / distance);
-            return firstSpeed;
-        }
-
-        public double SecondSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
-        {
-            var secondSpeed = Math.Sqrt(2) * FirstSpaceVelocity(bigObj, smallObj);
-            return secondSpeed;
         }
     }
 }

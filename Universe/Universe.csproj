@@ -44,6 +44,7 @@
     <Compile Include="AstronomicalObject.cs" />
     <Compile Include="IAstronomicalObject.cs" />
     <Compile Include="ICollison.cs" />
+    <Compile Include="Gravity.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimplyCollision.cs" />
