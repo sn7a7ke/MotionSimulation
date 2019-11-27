@@ -20,7 +20,7 @@ namespace MotionSimulation
 
             var Earth = new AstronomicalObject
             {
-                Name = "Earth",
+                Name = "Земля",
                 Mass = 5.9726E24,
                 Radius = 6.371E6,
                 Position = new Position(4E8, 4E8),
@@ -28,7 +28,7 @@ namespace MotionSimulation
             };
             var Moon = new AstronomicalObject
             {
-                Name = "Moon",
+                Name = "Місяць",
                 Mass = 7.3477E22,
                 Radius = 1.737E6,
                 Position = new Position(7.84467E8, 4E8),
@@ -36,62 +36,17 @@ namespace MotionSimulation
             };
             var Asteroid = new AstronomicalObject
             {
-                Name = "Asteroid",
-                Mass = 5E9,
+                Name = "Астероїд",
+                Mass = 5E9,               
                 Radius = 1E3,
                 Position = new Position(8.84467E8, 7E8),
                 SpeedVector = new SpeedVector(-1000, -810)
             };
-            var Asteroid2 = new AstronomicalObject
-            {
-                Name = "Asteroid2",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(8.84467E8 + 1E7, 7E8 + 1E7),
-                SpeedVector = new SpeedVector(-1000, -810)
-            };
-            var Asteroid3 = new AstronomicalObject
-            {
-                Name = "Asteroid3",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(8.84467E8 + 2E7, 7E8 + 2E7),
-                SpeedVector = new SpeedVector(-1000, -810)
-            };
-            var Asteroid4 = new AstronomicalObject
-            {
-                Name = "Asteroid4",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(8.84467E8 + 3E7, 7E8 + 3E7),
-                SpeedVector = new SpeedVector(-1000, -810)
-            };
-            var Asteroid5 = new AstronomicalObject
-            {
-                Name = "Asteroid for Moon",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(7.84467E8 + 3E7, 4E8),
-                SpeedVector = new SpeedVector(0, 1023 + 400)
-            };
-            var Asteroid6 = new AstronomicalObject
-            {
-                Name = "Asteroid for Earth",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(4E8 + 3E7, 4E8),
-                SpeedVector = new SpeedVector(0, -12.6 + 4000)
-            };
-
+   
             _system = new SystemOfBody();
             _system.AddBody(Earth);
             _system.AddBody(Moon);
-            _system.AddBody(Asteroid);
-            _system.AddBody(Asteroid2);
-            //_system.AddBody(Asteroid3);
-            //_system.AddBody(Asteroid4);
-            //_system.AddBody(Asteroid5);
-            //_system.AddBody(Asteroid6);
+            _system.AddBody(Asteroid);           
             _mainObject = _system.Bodies[0];
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
             _canvas.Scale.Length = (double)nUD_Length.Value;
@@ -107,7 +62,7 @@ namespace MotionSimulation
         private void FillInForm()
         {
             pb_Universe.Image = _canvas.MainBmp;
-            lbl_Info.Text = "From start: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
+            lbl_Info.Text = "З початку: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
                 GetObjectsInfo(_canvas.SystemOfBody.Bodies);
         }
 
@@ -122,8 +77,8 @@ namespace MotionSimulation
         private string GetObjectInfo(IAstronomicalObject obj)
         {
             return $"{obj.Name}:" + "\n" +
-                $"   - speed    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} km/s" + "\n" +
-                $"   - distance {GetDistanceInKilometers(_mainObject.Position, obj.Position)} Kkm" + "\n";
+                $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с" + "\n" +
+                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} тис. км" + "\n";
         }
 
         private string GetSpeedInKilometersPerSecond(double speed)
@@ -139,10 +94,10 @@ namespace MotionSimulation
         private string GetDateFromHours(int numberOfSeconds)
         {
             var hours = numberOfSeconds / secondsInHour;
-            return (hours / 8766).ToString("0") + " y " +
-                    (hours % 8766 / 730).ToString("0") + " m " +
-                    (hours % 730 / 24).ToString("00") + " d " +
-                    (hours % 24).ToString("00") + " h";
+            return (hours / 8766).ToString("0") + " г " +
+                    (hours % 8766 / 730).ToString("0") + " м " +
+                    (hours % 730 / 24).ToString("00") + " д " +
+                    (hours % 24).ToString("00") + " г";
         }
 
 
@@ -157,12 +112,12 @@ namespace MotionSimulation
             if (timer1.Enabled)
             {
                 timer1.Stop();
-                button1.Text = "Start";
+                button1.Text = "Розпочати";
             }
             else
             {
                 timer1.Start();
-                button1.Text = "Stop";
+                button1.Text = "Зупинити";
             }
         }
 
