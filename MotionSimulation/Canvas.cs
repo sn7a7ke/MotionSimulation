@@ -65,22 +65,12 @@ namespace MotionSimulation
         private void DrawBody(IAstronomicalObject obj)
         {
             Rectangle myRectangle = GetSquare(obj);
-
-            // Create a path that consists of a single ellipse.
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(myRectangle);
-            // Use the path to construct a brush.
             PathGradientBrush brush = new PathGradientBrush(path);
-            // Set the color at the center of the path to blue.
             brush.CenterColor = CenterColor;
-            // Set the color along the entire boundary 
-            // of the path to aqua.
             Color[] colors = { EdgeColor };
             brush.SurroundColors = colors;
-            //brush.FocusScales = new PointF(0.5f, 0.5f);
-
-            //SolidBrush brush = new SolidBrush(Color);
-
             Graph.FillEllipse(brush, myRectangle);
             Graph.DrawEllipse(Pen, myRectangle);
             path.Dispose();
@@ -123,19 +113,6 @@ namespace MotionSimulation
             SystemOfBody.TransferMassCenter(x * _scale.Length, y * _scale.Length);
         }
 
-        public Point GetCenter()
-        {
-            var speedVector = SystemOfBody.MassSpeedVector();
-            var dx = speedVector.ProjectionOnX / _scale.Length;
-            var dy = speedVector.ProjectionOnY / _scale.Length;
-            var stepX = _width / dx;
-            var stepY = _height / dy;
-
-            if (stepX > stepY)
-                return new Point(0, (int)((stepX - stepY) * dx / 2));
-            else
-                return new Point((int)((stepY - stepX) * dy / 2), 0);                
-        }
         public bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
         {
             var secondSpeed = Gravity.SecondSpaceVelocity(bigObj, smallObj);
