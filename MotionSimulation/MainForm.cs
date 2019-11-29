@@ -17,7 +17,14 @@ namespace MotionSimulation
         public MainForm()
         {
             InitializeComponent();
+            Initialize();
+            FillInForm();
 
+            timer1.Interval = timerInterval;
+        }
+
+        private void Initialize()
+        {
             var Earth = new AstronomicalObject
             {
                 Name = "Земля",
@@ -34,30 +41,31 @@ namespace MotionSimulation
                 Position = new Position(7.84467E8, 4E8),
                 SpeedVector = new SpeedVector(0, 1023)
             };
+
+            var speedX = (double)nUD_speedX.Value;
+            var speedY = (double)nUD_speedY.Value;
+            var positionX = (double)nUD_positionX.Value;
+            var positionY = (double)nUD_positionY.Value;
+            var scaleLength = (double)nUD_Length.Value;
             var Asteroid = new AstronomicalObject
             {
                 Name = "Астероїд",
-                Mass = 5E9,               
+                Mass = 5E9,
                 Radius = 1E3,
-                Position = new Position(8.84467E8, 7E8),
-                SpeedVector = new SpeedVector(-1000, -810)
+                Position = new Position(positionX, positionY),
+                SpeedVector = new SpeedVector(speedX, speedY)
             };
-   
+
             _system = new SystemOfBody();
             _system.AddBody(Earth);
             _system.AddBody(Moon);
-            _system.AddBody(Asteroid);           
+            _system.AddBody(Asteroid);
             _mainObject = _system.Bodies[0];
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
-            _canvas.Scale.Length = (double)nUD_Length.Value;
+            _canvas.Scale.Length = scaleLength;
             _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
-
             _canvas.Refresh();
-            FillInForm();
-
-            timer1.Interval = timerInterval;
         }
-
 
         private void FillInForm()
         {
@@ -113,11 +121,19 @@ namespace MotionSimulation
             {
                 timer1.Stop();
                 button1.Text = "Розпочати";
+                nUD_positionX.Enabled = true;
+                nUD_positionY.Enabled = true;
+                nUD_speedX.Enabled = true;
+                nUD_speedY.Enabled = true;
             }
             else
             {
                 timer1.Start();
                 button1.Text = "Зупинити";
+                nUD_positionX.Enabled = false;
+                nUD_positionY.Enabled = false;
+                nUD_speedX.Enabled = false;
+                nUD_speedY.Enabled = false;
             }
         }
 
@@ -159,6 +175,10 @@ namespace MotionSimulation
                 btn_IsAbandoned.ForeColor = Color.ForestGreen;
         }
 
-        //pb_Universe.CreateGraphics
+        private void nUD_NumChanged(object sender, EventArgs e)
+        {
+            Initialize();
+            FillInForm();
+        }
     }
 }

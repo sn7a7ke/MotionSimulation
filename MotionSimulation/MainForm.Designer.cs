@@ -31,24 +31,41 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pb_Universe = new System.Windows.Forms.PictureBox();
             this.lbl_Info = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.nUD_Length = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.nUD_Time = new System.Windows.Forms.NumericUpDown();
             this.btn_ToCenter = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.btn_IsAbandoned = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nUD_speedX = new System.Windows.Forms.NumericUpDown();
+            this.nUD_speedY = new System.Windows.Forms.NumericUpDown();
+            this.nUD_positionX = new System.Windows.Forms.NumericUpDown();
+            this.nUD_positionY = new System.Windows.Forms.NumericUpDown();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_speedX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_speedY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -57,15 +74,21 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 840);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1184, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1196, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = ".";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1196, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -79,7 +102,7 @@
             this.pb_Universe.InitialImage = null;
             this.pb_Universe.Location = new System.Drawing.Point(0, 27);
             this.pb_Universe.Name = "pb_Universe";
-            this.pb_Universe.Size = new System.Drawing.Size(1032, 810);
+            this.pb_Universe.Size = new System.Drawing.Size(1044, 810);
             this.pb_Universe.TabIndex = 2;
             this.pb_Universe.TabStop = false;
             this.pb_Universe.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_Universe_MouseMove);
@@ -89,7 +112,7 @@
             // 
             this.lbl_Info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Info.AutoSize = true;
-            this.lbl_Info.Location = new System.Drawing.Point(1038, 36);
+            this.lbl_Info.Location = new System.Drawing.Point(1050, 36);
             this.lbl_Info.Name = "lbl_Info";
             this.lbl_Info.Size = new System.Drawing.Size(10, 13);
             this.lbl_Info.TabIndex = 3;
@@ -102,11 +125,11 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1084, 816);
+            this.button1.Location = new System.Drawing.Point(1096, 816);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 21);
             this.button1.TabIndex = 5;
-            this.button1.Text = "Start";
+            this.button1.Text = "Розпочати";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -118,7 +141,7 @@
             0,
             0,
             0});
-            this.nUD_Length.Location = new System.Drawing.Point(1084, 790);
+            this.nUD_Length.Location = new System.Drawing.Point(62, 43);
             this.nUD_Length.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -131,7 +154,7 @@
             0});
             this.nUD_Length.Name = "nUD_Length";
             this.nUD_Length.ReadOnly = true;
-            this.nUD_Length.Size = new System.Drawing.Size(88, 20);
+            this.nUD_Length.Size = new System.Drawing.Size(74, 20);
             this.nUD_Length.TabIndex = 7;
             this.nUD_Length.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nUD_Length.ThousandsSeparator = true;
@@ -143,35 +166,25 @@
             0});
             this.nUD_Length.ValueChanged += new System.EventHandler(this.nUD_Length_ValueChanged);
             // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1039, 737);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Scale";
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1039, 766);
+            this.label5.Location = new System.Drawing.Point(2, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Time";
+            this.label5.Text = "Час";
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1038, 790);
+            this.label6.Location = new System.Drawing.Point(3, 46);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Length";
+            this.label6.Text = "Довжина";
             // 
             // nUD_Time
             // 
@@ -181,7 +194,7 @@
             0,
             0,
             0});
-            this.nUD_Time.Location = new System.Drawing.Point(1084, 764);
+            this.nUD_Time.Location = new System.Drawing.Point(62, 17);
             this.nUD_Time.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -194,7 +207,7 @@
             0});
             this.nUD_Time.Name = "nUD_Time";
             this.nUD_Time.ReadOnly = true;
-            this.nUD_Time.Size = new System.Drawing.Size(88, 20);
+            this.nUD_Time.Size = new System.Drawing.Size(74, 20);
             this.nUD_Time.TabIndex = 11;
             this.nUD_Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nUD_Time.ThousandsSeparator = true;
@@ -209,44 +222,251 @@
             // btn_ToCenter
             // 
             this.btn_ToCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ToCenter.Location = new System.Drawing.Point(1084, 672);
+            this.btn_ToCenter.Location = new System.Drawing.Point(1096, 755);
             this.btn_ToCenter.Name = "btn_ToCenter";
             this.btn_ToCenter.Size = new System.Drawing.Size(88, 26);
             this.btn_ToCenter.TabIndex = 12;
-            this.btn_ToCenter.Text = "To center";
+            this.btn_ToCenter.Text = "У центр";
             this.toolTip1.SetToolTip(this.btn_ToCenter, "Move the Mass center to the center window");
             this.btn_ToCenter.UseVisualStyleBackColor = true;
             this.btn_ToCenter.Click += new System.EventHandler(this.btn_ToCenter_Click);
             // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel1.Text = ".";
-            // 
             // btn_IsAbandoned
             // 
             this.btn_IsAbandoned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_IsAbandoned.Location = new System.Drawing.Point(1084, 705);
+            this.btn_IsAbandoned.Location = new System.Drawing.Point(1096, 787);
             this.btn_IsAbandoned.Name = "btn_IsAbandoned";
             this.btn_IsAbandoned.Size = new System.Drawing.Size(88, 23);
             this.btn_IsAbandoned.TabIndex = 13;
-            this.btn_IsAbandoned.Text = "Is abandoned";
+            this.btn_IsAbandoned.Text = "Повернеться";
             this.btn_IsAbandoned.UseVisualStyleBackColor = true;
             this.btn_IsAbandoned.Click += new System.EventHandler(this.btn_IsAbandoned_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Y:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.nUD_positionY);
+            this.groupBox1.Controls.Add(this.nUD_positionX);
+            this.groupBox1.Controls.Add(this.nUD_speedY);
+            this.groupBox1.Controls.Add(this.nUD_speedX);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(1050, 509);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(141, 163);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Астероїд";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 92);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Позиція, м:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 114);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Х:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 139);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Y:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Швидкість, м/с:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Х:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.nUD_Time);
+            this.groupBox2.Controls.Add(this.nUD_Length);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(1050, 678);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(141, 71);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Масштаб";
+            // 
+            // nUD_speedX
+            // 
+            this.nUD_speedX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nUD_speedX.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nUD_speedX.Location = new System.Drawing.Point(33, 45);
+            this.nUD_speedX.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nUD_speedX.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.nUD_speedX.Name = "nUD_speedX";
+            this.nUD_speedX.Size = new System.Drawing.Size(103, 20);
+            this.nUD_speedX.TabIndex = 24;
+            this.nUD_speedX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_speedX.ThousandsSeparator = true;
+            this.nUD_speedX.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_speedX.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.nUD_speedX.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
+            // 
+            // nUD_speedY
+            // 
+            this.nUD_speedY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nUD_speedY.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nUD_speedY.Location = new System.Drawing.Point(33, 71);
+            this.nUD_speedY.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nUD_speedY.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.nUD_speedY.Name = "nUD_speedY";
+            this.nUD_speedY.Size = new System.Drawing.Size(103, 20);
+            this.nUD_speedY.TabIndex = 25;
+            this.nUD_speedY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_speedY.ThousandsSeparator = true;
+            this.nUD_speedY.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_speedY.Value = new decimal(new int[] {
+            800,
+            0,
+            0,
+            -2147483648});
+            this.nUD_speedY.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
+            // 
+            // nUD_positionX
+            // 
+            this.nUD_positionX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nUD_positionX.Increment = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nUD_positionX.Location = new System.Drawing.Point(33, 112);
+            this.nUD_positionX.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.nUD_positionX.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.nUD_positionX.Name = "nUD_positionX";
+            this.nUD_positionX.Size = new System.Drawing.Size(103, 20);
+            this.nUD_positionX.TabIndex = 26;
+            this.nUD_positionX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_positionX.ThousandsSeparator = true;
+            this.nUD_positionX.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_positionX.Value = new decimal(new int[] {
+            880000000,
+            0,
+            0,
+            0});
+            this.nUD_positionX.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
+            // 
+            // nUD_positionY
+            // 
+            this.nUD_positionY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nUD_positionY.Increment = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.nUD_positionY.Location = new System.Drawing.Point(33, 137);
+            this.nUD_positionY.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.nUD_positionY.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.nUD_positionY.Name = "nUD_positionY";
+            this.nUD_positionY.Size = new System.Drawing.Size(103, 20);
+            this.nUD_positionY.TabIndex = 27;
+            this.nUD_positionY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_positionY.ThousandsSeparator = true;
+            this.nUD_positionY.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_positionY.Value = new decimal(new int[] {
+            700000000,
+            0,
+            0,
+            0});
+            this.nUD_positionY.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 862);
+            this.ClientSize = new System.Drawing.Size(1196, 862);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_IsAbandoned);
             this.Controls.Add(this.btn_ToCenter);
-            this.Controls.Add(this.nUD_Time);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.nUD_Length);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbl_Info);
             this.Controls.Add(this.pb_Universe);
@@ -255,12 +475,20 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(800, 640);
             this.Name = "MainForm";
-            this.Text = "Simulation of motion";
+            this.Text = "Задача тіл";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_speedX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_speedY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,7 +503,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown nUD_Length;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nUD_Time;
@@ -283,6 +510,18 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Button btn_IsAbandoned;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown nUD_positionX;
+        private System.Windows.Forms.NumericUpDown nUD_speedY;
+        private System.Windows.Forms.NumericUpDown nUD_speedX;
+        private System.Windows.Forms.NumericUpDown nUD_positionY;
     }
 }
 
