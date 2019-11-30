@@ -14,12 +14,12 @@ namespace MotionSimulation
         private const int secondsInHour = 3600;
         private const int timerInterval = 40;
         private IAstronomicalObject _mainObject;
+
         public MainForm()
         {
             InitializeComponent();
             Initialize();
             FillInForm();
-
             timer1.Interval = timerInterval;
         }
 

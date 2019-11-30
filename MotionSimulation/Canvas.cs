@@ -40,6 +40,8 @@ namespace MotionSimulation
             var center = SystemOfBody.MassCenter();
             Center = new Point((int)(center.X / _scale.Length), (int)(center.Y / _scale.Length));
             Pen = new Pen(EdgeColor);
+            //MainBmp = new Bitmap(Width, Height);
+            //Graph = Graphics.FromImage(MainBmp);
             Clear();
             SecondsFromStart = 0;
         }
