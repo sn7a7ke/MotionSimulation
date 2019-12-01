@@ -11,6 +11,7 @@ namespace MotionSimulation
         private Scale _scale;
         private int _width;
         private int _height;
+        private Point _offsetCenter;
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -37,8 +38,6 @@ namespace MotionSimulation
 
             Scale = GetEstimateScale();
             _scale = Scale;
-            var center = SystemOfBody.MassCenter();
-            Center = new Point((int)(center.X / _scale.Length), (int)(center.Y / _scale.Length));
             Pen = new Pen(EdgeColor);
             //MainBmp = new Bitmap(Width, Height);
             //Graph = Graphics.FromImage(MainBmp);
@@ -59,7 +58,7 @@ namespace MotionSimulation
         public void Refresh()
         {
             Clear();
-            TransferMassCenter(Center.X, Center.Y);
+            MoveCenterTo();
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
         }
@@ -81,12 +80,20 @@ namespace MotionSimulation
 
         private Rectangle GetSquare(IAstronomicalObject obj)
         {
-            var leftTopX = (int)((obj.Position.X - obj.Radius) / _scale.Length);
-            var leftTopY = (int)((obj.Position.Y - obj.Radius) / _scale.Length);
             var size = (int)(2 * _scale.Radius * obj.Radius / _scale.Length);
             if (size < MinBodySize)
                 size = MinBodySize;
-            return new Rectangle(leftTopX, leftTopY, size, size);
+            var leftTop = obj.Position.Clone();
+            leftTop.Shift(-obj.Radius, -obj.Radius);
+            var dot = PositionToScreenDot(leftTop);
+            return new Rectangle(dot.X, dot.Y, size, size);
+        }
+
+        private Point PositionToScreenDot(Position position)
+        {
+            var X = (int)(position.X / _scale.Length) + _offsetCenter.X;
+            var Y = (int)(position.Y / _scale.Length) + _offsetCenter.Y;
+            return new Point(X, Y);
         }
 
         private void Clear()
@@ -104,15 +111,17 @@ namespace MotionSimulation
             return new Scale(1E6, 60 * 60, 1);
         }
 
-        public void TransferMassCenter()
+        public Point MoveCenterTo()
         {
-            Center = new Point(_width / 2, _height / 2);
-            TransferMassCenter(_width / 2, _height / 2);
+            return MoveCenterTo(_width / 2, _height / 2);
         }
-
-        public void TransferMassCenter(int x, int y)
+        public Point MoveCenterTo(int x, int y)
         {
-            SystemOfBody.TransferMassCenter(x * _scale.Length, y * _scale.Length);
+            Position massCenter = SystemOfBody.MassCenter();
+            var dx = x - (int)(massCenter.X / _scale.Length);
+            var dy = y - (int)(massCenter.Y / _scale.Length);
+            _offsetCenter = new Point(dx, dy);
+            return _offsetCenter;
         }
 
         public bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)

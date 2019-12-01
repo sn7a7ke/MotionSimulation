@@ -151,7 +151,7 @@ namespace MotionSimulation
 
         private void btn_ToCenter_Click(object sender, System.EventArgs e)
         {
-            _canvas.TransferMassCenter();
+            _canvas.MoveCenterTo();
             _canvas.Refresh();
             FillInForm();
         }
