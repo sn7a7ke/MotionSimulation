@@ -98,10 +98,6 @@ namespace MotionSimulation
             var points = PositionsToScreenDots(_traces.GetAll());
             if (points.Length > 1)
                 Graph.DrawCurve(Pen, points);
-
-
-            //for (int i = 0; i < _traces.Quantity; i++)
-            //    MainBmp.SetPixel(_traces[i].X, _traces[i].Y, EdgeColor);
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)

@@ -51,8 +51,9 @@ namespace MotionSimulation
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(461, 84);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TabStop = false;
             this.textBox1.Text = "Дніпровський ліцей інформаційних технологій\r\nпри Дніпровському національному унів" +
-    "ерситеті \r\nімені Олеся Гончара\r\n\r\n";
+    "ерситеті \r\nімені Олеся Гончара";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox2
@@ -68,7 +69,8 @@ namespace MotionSimulation
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(386, 122);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "Випускна робота\r\nна тему:\r\n«Моделювання руху тіл»\r\n\r\n";
+            this.textBox2.TabStop = false;
+            this.textBox2.Text = "Випускна робота\r\nна тему:\r\n«Моделювання руху тіл»";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox3
@@ -83,7 +85,8 @@ namespace MotionSimulation
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(231, 110);
             this.textBox3.TabIndex = 2;
-            this.textBox3.Text = "Виконавець: \r\nліцеїст 11-В класу\r\nПєтухов Дмитро\r\n\r\n";
+            this.textBox3.TabStop = false;
+            this.textBox3.Text = "Виконавець: \r\nліцеїст 11-В класу\r\nПєтухов Дмитро";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
@@ -128,7 +131,6 @@ namespace MotionSimulation
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "Menu";
             this.Text = "Menu";
-            //this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,11 +142,10 @@ namespace MotionSimulation
         //}
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
