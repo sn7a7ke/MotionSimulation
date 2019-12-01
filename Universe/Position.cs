@@ -14,6 +14,12 @@ namespace Universe
 
         public double Y { get; set; }
 
+        public void Shift(double dx, double dy)
+        {
+            X += dx;
+            Y += dy;
+        }
+
         public static double Distance(Position pos1, Position pos2)
         {
             var dx = pos1.X - pos2.X;
@@ -21,5 +27,7 @@ namespace Universe
             var length = Math.Sqrt(dx * dx + dy * dy);
             return length;
         }
+
+        public Position Clone() => new Position(X, Y);
     }
 }

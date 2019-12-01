@@ -17,8 +17,7 @@
 
         public void Move()
         {
-            Position.X += SpeedVector.ProjectionOnX;
-            Position.Y += SpeedVector.ProjectionOnY;
+            Position.Shift(SpeedVector.ProjectionOnX, SpeedVector.ProjectionOnY);
         }
     }
 }

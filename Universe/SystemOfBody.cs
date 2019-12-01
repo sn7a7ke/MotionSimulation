@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Universe
@@ -71,11 +69,8 @@ namespace Universe
             Position massCenter = MassCenter();
             var dx = x - massCenter.X;
             var dy = y - massCenter.Y;
-            for (int i = 0; i < Count; i++)
-            {
-                Bodies[i].Position.X += dx;
-                Bodies[i].Position.Y += dy;
-            }
+            for (int i = 0; i < Count; i++)            
+                Bodies[i].Position.Shift(dx, dy);
         }
 
         public SpeedVector MassSpeedVector()
@@ -144,7 +139,7 @@ namespace Universe
 
         private void ReplaceBody(IAstronomicalObject oldObj, IAstronomicalObject newObj)
         {
-            var index = Bodies.IndexOf(Bodies.Where(n => n.Name == oldObj.Name).First());
+            var index = Bodies.IndexOf(Bodies.First(n => n.Name == oldObj.Name));
             Bodies[index] = newObj;
         }
     }

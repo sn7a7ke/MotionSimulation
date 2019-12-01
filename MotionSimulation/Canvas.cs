@@ -26,11 +26,17 @@ namespace MotionSimulation
         public Color CenterColor { get; set; } = Color.FromArgb(255, 0, 0, 255);
 
         public int SecondsFromStart { get; private set; }
+        public int QtyPositions { get; set; }
+
+        private readonly Traces<Position> _traces;
+        private int _numberOfBody;
 
         public Canvas(int width, int height, SystemOfBody systemOfBody)
         {
-            if (width < 0 || height < 0)
-                throw new ArgumentOutOfRangeException("Sizes of canvas must be positive");
+            if (width < 0)
+                throw new ArgumentOutOfRangeException(nameof(width), "Sizes of canvas must be positive");
+            if (height < 0)
+                throw new ArgumentOutOfRangeException(nameof(height), "Sizes of canvas must be positive");
             Width = width;
             Height = height;
             SystemOfBody = systemOfBody ?? throw new ArgumentNullException(nameof(systemOfBody));
@@ -44,6 +50,9 @@ namespace MotionSimulation
             //Graph = Graphics.FromImage(MainBmp);
             Clear();
             SecondsFromStart = 0;
+            QtyPositions = 50;
+            _traces = new Traces<Position>(QtyPositions);
+            _numberOfBody = SystemOfBody.Count - 1;
         }
 
         public void DoStep()
@@ -52,7 +61,12 @@ namespace MotionSimulation
             _scale = Scale;
             for (int i = 0; i < _scale.Time; i++)
                 if (SystemOfBody.DoStep())
+                {
                     Bang();
+                    _traces.MaxQuantity = 0;
+                    _numberOfBody = 0;
+                }
+            _traces.Add(SystemOfBody[_numberOfBody].Position.Clone());
             Refresh();
         }
 
@@ -62,6 +76,7 @@ namespace MotionSimulation
             TransferMassCenter(Center.X, Center.Y);
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
+            DrawTraces();
         }
 
         private void DrawBody(IAstronomicalObject obj)
@@ -79,14 +94,41 @@ namespace MotionSimulation
             brush.Dispose();
         }
 
+        private void DrawTraces()
+        {
+            var points = PositionsToScreenDots(_traces.GetAll());
+            if (points.Length > 1)
+                Graph.DrawCurve(Pen, points);
+
+
+            //for (int i = 0; i < _traces.Quantity; i++)
+            //    MainBmp.SetPixel(_traces[i].X, _traces[i].Y, EdgeColor);
+        }
+
         private Rectangle GetSquare(IAstronomicalObject obj)
         {
-            var leftTopX = (int)((obj.Position.X - obj.Radius) / _scale.Length);
-            var leftTopY = (int)((obj.Position.Y - obj.Radius) / _scale.Length);
             var size = (int)(2 * _scale.Radius * obj.Radius / _scale.Length);
             if (size < MinBodySize)
                 size = MinBodySize;
-            return new Rectangle(leftTopX, leftTopY, size, size);
+            var leftTop = obj.Position.Clone();
+            leftTop.Shift(-obj.Radius, -obj.Radius);
+            var dot = PositionToScreenDot(leftTop);            
+            return new Rectangle(dot.X, dot.Y, size, size);
+        }
+
+        private Point[] PositionsToScreenDots(Position[] positions)
+        {
+            Point[] points = new Point[positions.Length];
+            for (int i = 0; i < positions.Length; i++)
+                points[i] = PositionToScreenDot(positions[i]);
+            return points;
+        }
+
+        private Point PositionToScreenDot(Position position)
+        {
+            var X = (int)(position.X / _scale.Length);
+            var Y = (int)(position.Y / _scale.Length);
+            return new Point(X, Y);
         }
 
         private void Clear()
