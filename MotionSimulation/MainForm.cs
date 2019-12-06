@@ -25,6 +25,8 @@ namespace MotionSimulation
 
         private void Initialize()
         {
+            var scaleLength = (double)nUD_Length.Value;
+
             var Earth = new AstronomicalObject
             {
                 Name = "Земля",
@@ -42,24 +44,10 @@ namespace MotionSimulation
                 SpeedVector = new SpeedVector(0, 1023)
             };
 
-            var speedX = (double)nUD_speedX.Value;
-            var speedY = (double)nUD_speedY.Value;
-            var positionX = (double)nUD_positionX.Value;
-            var positionY = (double)nUD_positionY.Value;
-            var scaleLength = (double)nUD_Length.Value;
-            var Asteroid = new AstronomicalObject
-            {
-                Name = "Астероїд",
-                Mass = 5E9,
-                Radius = 1E3,
-                Position = new Position(positionX, positionY),
-                SpeedVector = new SpeedVector(speedX, speedY)
-            };
 
             _system = new SystemOfBody();
             _system.AddBody(Earth);
             _system.AddBody(Moon);
-            _system.AddBody(Asteroid);
             _mainObject = _system.Bodies[0];
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
             _canvas.Scale.Length = scaleLength;
@@ -125,6 +113,7 @@ namespace MotionSimulation
                 nUD_positionY.Enabled = true;
                 nUD_speedX.Enabled = true;
                 nUD_speedY.Enabled = true;
+                btn_AddBody.Enabled = true;
             }
             else
             {
@@ -134,6 +123,7 @@ namespace MotionSimulation
                 nUD_positionY.Enabled = false;
                 nUD_speedX.Enabled = false;
                 nUD_speedY.Enabled = false;
+                btn_AddBody.Enabled = false;
             }
         }
 
@@ -175,9 +165,24 @@ namespace MotionSimulation
                 btn_IsAbandoned.ForeColor = Color.ForestGreen;
         }
 
-        private void nUD_NumChanged(object sender, EventArgs e)
+        private void btn_AddBody_Click(object sender, EventArgs e)
         {
-            Initialize();
+            var speedX = (double)nUD_speedX.Value;
+            var speedY = (double)nUD_speedY.Value;
+            var positionX = (double)nUD_positionX.Value;
+            var positionY = (double)nUD_positionY.Value;
+            var Asteroid = new AstronomicalObject
+            {
+                Name = "Астероїд",
+                Mass = 5E9,
+                Radius = 1E3,
+                Position = new Position(positionX, positionY),
+                SpeedVector = new SpeedVector(speedX, speedY)
+            };
+            _system.AddBody(Asteroid);
+            _canvas.BodyWithTraces = _system.Count - 1;
+            _canvas.ShowTraces = true;
+            _canvas.Refresh();
             FillInForm();
         }
     }

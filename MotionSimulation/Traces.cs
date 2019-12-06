@@ -46,6 +46,11 @@ namespace MotionSimulation
                 _items.RemoveAt(_items.Count - 1);
         }
 
+        public void Clear()
+        {
+            _items.Clear();
+        }
+
         public T[] GetAll() => _items.ToArray();
     }
 }

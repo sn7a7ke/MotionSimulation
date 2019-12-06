@@ -48,6 +48,7 @@ namespace MotionSimulation
             this.btn_IsAbandoned = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_AddBody = new System.Windows.Forms.Button();
             this.nUD_positionY = new System.Windows.Forms.NumericUpDown();
             this.nUD_positionX = new System.Windows.Forms.NumericUpDown();
             this.nUD_speedY = new System.Windows.Forms.NumericUpDown();
@@ -74,7 +75,7 @@ namespace MotionSimulation
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 903);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 904);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1284, 22);
@@ -131,10 +132,10 @@ namespace MotionSimulation
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1129, 850);
+            this.button1.Location = new System.Drawing.Point(1129, 846);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 32);
+            this.button1.Size = new System.Drawing.Size(132, 30);
             this.button1.TabIndex = 5;
             this.button1.Text = "Розпочати";
             this.button1.UseVisualStyleBackColor = true;
@@ -148,7 +149,7 @@ namespace MotionSimulation
             0,
             0,
             0});
-            this.nUD_Length.Location = new System.Drawing.Point(93, 66);
+            this.nUD_Length.Location = new System.Drawing.Point(91, 65);
             this.nUD_Length.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_Length.Maximum = new decimal(new int[] {
             10000000,
@@ -178,7 +179,7 @@ namespace MotionSimulation
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 31);
+            this.label5.Location = new System.Drawing.Point(7, 31);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 20);
@@ -189,7 +190,7 @@ namespace MotionSimulation
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 71);
+            this.label6.Location = new System.Drawing.Point(8, 71);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 20);
@@ -204,7 +205,7 @@ namespace MotionSimulation
             0,
             0,
             0});
-            this.nUD_Time.Location = new System.Drawing.Point(93, 26);
+            this.nUD_Time.Location = new System.Drawing.Point(91, 25);
             this.nUD_Time.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_Time.Maximum = new decimal(new int[] {
             1000000,
@@ -233,10 +234,10 @@ namespace MotionSimulation
             // btn_ToCenter
             // 
             this.btn_ToCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ToCenter.Location = new System.Drawing.Point(1129, 756);
+            this.btn_ToCenter.Location = new System.Drawing.Point(1129, 766);
             this.btn_ToCenter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ToCenter.Name = "btn_ToCenter";
-            this.btn_ToCenter.Size = new System.Drawing.Size(132, 40);
+            this.btn_ToCenter.Size = new System.Drawing.Size(132, 30);
             this.btn_ToCenter.TabIndex = 12;
             this.btn_ToCenter.Text = "У центр";
             this.toolTip1.SetToolTip(this.btn_ToCenter, "Move the Mass center to the center window");
@@ -246,10 +247,10 @@ namespace MotionSimulation
             // btn_IsAbandoned
             // 
             this.btn_IsAbandoned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_IsAbandoned.Location = new System.Drawing.Point(1129, 805);
+            this.btn_IsAbandoned.Location = new System.Drawing.Point(1129, 806);
             this.btn_IsAbandoned.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_IsAbandoned.Name = "btn_IsAbandoned";
-            this.btn_IsAbandoned.Size = new System.Drawing.Size(132, 35);
+            this.btn_IsAbandoned.Size = new System.Drawing.Size(132, 30);
             this.btn_IsAbandoned.TabIndex = 13;
             this.btn_IsAbandoned.Text = "Повернеться";
             this.btn_IsAbandoned.UseVisualStyleBackColor = true;
@@ -258,7 +259,7 @@ namespace MotionSimulation
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 112);
+            this.label1.Location = new System.Drawing.Point(15, 85);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 20);
@@ -268,6 +269,7 @@ namespace MotionSimulation
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btn_AddBody);
             this.groupBox1.Controls.Add(this.nUD_positionY);
             this.groupBox1.Controls.Add(this.nUD_positionX);
             this.groupBox1.Controls.Add(this.nUD_speedY);
@@ -287,15 +289,26 @@ namespace MotionSimulation
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Астероїд";
             // 
+            // btn_AddBody
+            // 
+            this.btn_AddBody.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AddBody.Location = new System.Drawing.Point(70, 211);
+            this.btn_AddBody.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_AddBody.Name = "btn_AddBody";
+            this.btn_AddBody.Size = new System.Drawing.Size(132, 30);
+            this.btn_AddBody.TabIndex = 28;
+            this.btn_AddBody.Text = "Додати";
+            this.btn_AddBody.UseVisualStyleBackColor = true;
+            this.btn_AddBody.Click += new System.EventHandler(this.btn_AddBody_Click);
+            // 
             // nUD_positionY
             // 
-            this.nUD_positionY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nUD_positionY.Increment = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.nUD_positionY.Location = new System.Drawing.Point(50, 211);
+            this.nUD_positionY.Location = new System.Drawing.Point(48, 180);
             this.nUD_positionY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_positionY.Maximum = new decimal(new int[] {
             1000000000,
@@ -318,17 +331,15 @@ namespace MotionSimulation
             0,
             0,
             0});
-            this.nUD_positionY.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
             // 
             // nUD_positionX
             // 
-            this.nUD_positionX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nUD_positionX.Increment = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.nUD_positionX.Location = new System.Drawing.Point(50, 172);
+            this.nUD_positionX.Location = new System.Drawing.Point(48, 145);
             this.nUD_positionX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_positionX.Maximum = new decimal(new int[] {
             1000000000,
@@ -351,17 +362,15 @@ namespace MotionSimulation
             0,
             0,
             0});
-            this.nUD_positionX.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
             // 
             // nUD_speedY
             // 
-            this.nUD_speedY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nUD_speedY.Increment = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.nUD_speedY.Location = new System.Drawing.Point(50, 109);
+            this.nUD_speedY.Location = new System.Drawing.Point(48, 83);
             this.nUD_speedY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_speedY.Maximum = new decimal(new int[] {
             10000,
@@ -384,17 +393,15 @@ namespace MotionSimulation
             0,
             0,
             -2147483648});
-            this.nUD_speedY.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
             // 
             // nUD_speedX
             // 
-            this.nUD_speedX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.nUD_speedX.Increment = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.nUD_speedX.Location = new System.Drawing.Point(50, 69);
+            this.nUD_speedX.Location = new System.Drawing.Point(48, 48);
             this.nUD_speedX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_speedX.Maximum = new decimal(new int[] {
             10000,
@@ -417,12 +424,11 @@ namespace MotionSimulation
             0,
             0,
             -2147483648});
-            this.nUD_speedX.ValueChanged += new System.EventHandler(this.nUD_NumChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 142);
+            this.label7.Location = new System.Drawing.Point(7, 119);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 20);
@@ -432,7 +438,7 @@ namespace MotionSimulation
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 175);
+            this.label8.Location = new System.Drawing.Point(15, 147);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 20);
@@ -442,7 +448,7 @@ namespace MotionSimulation
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 214);
+            this.label9.Location = new System.Drawing.Point(15, 182);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(24, 20);
@@ -452,7 +458,7 @@ namespace MotionSimulation
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 37);
+            this.label3.Location = new System.Drawing.Point(7, 23);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 20);
@@ -462,7 +468,7 @@ namespace MotionSimulation
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 72);
+            this.label2.Location = new System.Drawing.Point(15, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 20);
@@ -489,7 +495,7 @@ namespace MotionSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 925);
+            this.ClientSize = new System.Drawing.Size(1284, 926);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_IsAbandoned);
@@ -557,6 +563,7 @@ namespace MotionSimulation
         private System.Windows.Forms.NumericUpDown nUD_speedY;
         private System.Windows.Forms.NumericUpDown nUD_speedX;
         private System.Windows.Forms.NumericUpDown nUD_positionY;
+        private System.Windows.Forms.Button btn_AddBody;
     }
 }
 

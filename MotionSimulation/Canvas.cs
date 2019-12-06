@@ -28,9 +28,25 @@ namespace MotionSimulation
 
         public int SecondsFromStart { get; private set; }
         public int QtyPositions { get; set; }
+        public bool ShowTraces { get; set; } = false;
+
+        private int _bodyWithTraces;
+        public int BodyWithTraces
+        {
+            get => _bodyWithTraces;
+            set
+            {
+                if (value < 0 || value >= SystemOfBody.Count)
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                if (value != _bodyWithTraces)
+                {
+                    _traces.Clear();
+                    _bodyWithTraces = value;
+                }
+            }
+        }
 
         private readonly Traces<Position> _traces;
-        private int _numberOfBody;
 
         public Canvas(int width, int height, SystemOfBody systemOfBody)
         {
@@ -51,7 +67,7 @@ namespace MotionSimulation
             SecondsFromStart = 0;
             QtyPositions = 500;
             _traces = new Traces<Position>(QtyPositions);
-            _numberOfBody = SystemOfBody.Count - 1;
+            BodyWithTraces = SystemOfBody.Count - 1;
         }
 
         public void DoStep()
@@ -62,10 +78,11 @@ namespace MotionSimulation
                 if (SystemOfBody.DoStep())
                 {
                     Bang();
-                    _traces.MaxQuantity = 0;
-                    _numberOfBody = 0;
+                    ShowTraces = false;
+                    BodyWithTraces = 0;
                 }
-            _traces.Add(SystemOfBody[_numberOfBody].Position.Clone());
+            if (ShowTraces)
+                _traces.Add(SystemOfBody[BodyWithTraces].Position.Clone());
             Refresh();
         }
 
@@ -75,7 +92,8 @@ namespace MotionSimulation
             MoveCenterTo();
             for (int i = 0; i < SystemOfBody.Count; i++)
                 DrawBody(SystemOfBody[i]);
-            DrawTraces();
+            if (ShowTraces)
+                DrawTraces();
         }
 
         private void DrawBody(IAstronomicalObject obj)
