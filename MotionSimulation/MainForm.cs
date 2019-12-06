@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using Universe;
 
@@ -72,9 +73,9 @@ namespace MotionSimulation
 
         private string GetObjectInfo(IAstronomicalObject obj)
         {
-            return $"{obj.Name}:" + "\n" +
-                $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с" + "\n" +
-                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} тис. км" + "\n";
+            return $"{obj.Name}:\n" +
+                $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с\n" +
+                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} тис. км\n";
         }
 
         private string GetSpeedInKilometersPerSecond(double speed)
@@ -90,10 +91,16 @@ namespace MotionSimulation
         private string GetDateFromHours(int numberOfSeconds)
         {
             var hours = numberOfSeconds / secondsInHour;
-            return (hours / hoursInYear).ToString("0") + " р " +
-                    (hours % hoursInYear / hoursInMonth).ToString("0") + " м " +
-                    (hours % hoursInMonth / hoursInDay).ToString("00") + " д " +
-                    (hours % hoursInDay).ToString("00") + " г";
+            var sb = new StringBuilder();
+            sb.Append((hours / hoursInYear).ToString("0"));
+            sb.Append(" р ");
+            sb.Append((hours % hoursInYear / hoursInMonth).ToString("0"));
+            sb.Append(" м ");
+            sb.Append((hours % hoursInMonth / hoursInDay).ToString("00"));
+            sb.Append(" д ");
+            sb.Append((hours % hoursInDay).ToString("00"));
+            sb.Append(" г");
+            return sb.ToString();
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
