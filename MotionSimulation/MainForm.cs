@@ -11,6 +11,7 @@ namespace MotionSimulation
         private Canvas _canvas;
         private const int secondsInHour = 3600;
         private const int timerInterval = 40;
+        private const int framesPerSecond = 1000 / timerInterval;
         private IAstronomicalObject _mainObject;
 
         public MainForm()
@@ -46,7 +47,7 @@ namespace MotionSimulation
             _canvas.AddBody(Earth);
             _canvas.AddBody(Moon);
             _canvas.Scale.Length = scaleLength;
-            _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
+            _canvas.Scale.Time = (int)(nUD_Time.Value / framesPerSecond);
             FillInForm();
         }
 
@@ -122,7 +123,7 @@ namespace MotionSimulation
 
         private void nUD_Time_ValueChanged(object sender, System.EventArgs e)
         {
-            _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
+            _canvas.Scale.Time = (int)(nUD_Time.Value / framesPerSecond);
         }
 
         private void btn_ToCenter_Click(object sender, System.EventArgs e)
