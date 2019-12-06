@@ -90,7 +90,7 @@ namespace MotionSimulation
         private string GetDateFromHours(int numberOfSeconds)
         {
             var hours = numberOfSeconds / secondsInHour;
-            return (hours / 8766).ToString("0") + " г " +
+            return (hours / 8766).ToString("0") + " р " +
                     (hours % 8766 / 730).ToString("0") + " м " +
                     (hours % 730 / 24).ToString("00") + " д " +
                     (hours % 24).ToString("00") + " г";
@@ -109,21 +109,13 @@ namespace MotionSimulation
             {
                 timer1.Stop();
                 button1.Text = "Розпочати";
-                nUD_positionX.Enabled = true;
-                nUD_positionY.Enabled = true;
-                nUD_speedX.Enabled = true;
-                nUD_speedY.Enabled = true;
-                btn_AddBody.Enabled = true;
+                groupBox1.Enabled = true;
             }
             else
             {
                 timer1.Start();
                 button1.Text = "Зупинити";
-                nUD_positionX.Enabled = false;
-                nUD_positionY.Enabled = false;
-                nUD_speedX.Enabled = false;
-                nUD_speedY.Enabled = false;
-                btn_AddBody.Enabled = false;
+                groupBox1.Enabled = false;
             }
         }
 
@@ -171,10 +163,11 @@ namespace MotionSimulation
             var speedY = (double)nUD_speedY.Value;
             var positionX = (double)nUD_positionX.Value;
             var positionY = (double)nUD_positionY.Value;
+            var mass = (double)nUD_Mass.Value;
             var Asteroid = new AstronomicalObject
             {
                 Name = "Астероїд",
-                Mass = 5E9,
+                Mass = mass,
                 Radius = 1E3,
                 Position = new Position(positionX, positionY),
                 SpeedVector = new SpeedVector(speedX, speedY)
