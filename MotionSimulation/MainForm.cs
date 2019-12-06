@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 using Universe;
 
@@ -177,6 +176,15 @@ namespace MotionSimulation
             _canvas.ShowTraces = true;
             _canvas.Refresh();
             FillInForm();
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            toolStripStatusLabel2.Font = new Font(toolStripStatusLabel2.Font,
+                toolStripStatusLabel2.Font.Style == FontStyle.Strikeout ? FontStyle.Regular : FontStyle.Strikeout);
+            toolStripStatusLabel2.BorderStyle = 
+                toolStripStatusLabel2.BorderStyle == Border3DStyle.RaisedOuter ? Border3DStyle.SunkenInner : Border3DStyle.RaisedOuter;
+            _canvas.ShowTraces = !_canvas.ShowTraces;
         }
     }
 }

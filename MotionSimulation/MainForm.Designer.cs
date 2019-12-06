@@ -48,6 +48,8 @@ namespace MotionSimulation
             this.btn_IsAbandoned = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nUD_Mass = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.btn_AddBody = new System.Windows.Forms.Button();
             this.nUD_positionY = new System.Windows.Forms.NumericUpDown();
             this.nUD_positionX = new System.Windows.Forms.NumericUpDown();
@@ -59,37 +61,39 @@ namespace MotionSimulation
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.nUD_Mass = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Universe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_speedY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_speedX)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 904);
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 902);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1284, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1284, 24);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.AutoSize = false;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel1.Text = ".";
+            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // menuStrip1
             // 
@@ -289,6 +293,42 @@ namespace MotionSimulation
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Астероїд";
+            // 
+            // nUD_Mass
+            // 
+            this.nUD_Mass.Increment = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.nUD_Mass.Location = new System.Drawing.Point(70, 202);
+            this.nUD_Mass.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nUD_Mass.Maximum = new decimal(new int[] {
+            215752192,
+            23,
+            0,
+            0});
+            this.nUD_Mass.Name = "nUD_Mass";
+            this.nUD_Mass.Size = new System.Drawing.Size(132, 26);
+            this.nUD_Mass.TabIndex = 30;
+            this.nUD_Mass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_Mass.ThousandsSeparator = true;
+            this.nUD_Mass.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_Mass.Value = new decimal(new int[] {
+            705032704,
+            1,
+            0,
+            0});
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 204);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 20);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Вага, кг:";
             // 
             // btn_AddBody
             // 
@@ -492,41 +532,17 @@ namespace MotionSimulation
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Масштаб";
             // 
-            // nUD_Mass
+            // toolStripStatusLabel2
             // 
-            this.nUD_Mass.Increment = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.nUD_Mass.Location = new System.Drawing.Point(70, 202);
-            this.nUD_Mass.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.nUD_Mass.Maximum = new decimal(new int[] {
-            215752192,
-            23,
-            0,
-            0});
-            this.nUD_Mass.Name = "nUD_Mass";
-            this.nUD_Mass.Size = new System.Drawing.Size(132, 26);
-            this.nUD_Mass.TabIndex = 30;
-            this.nUD_Mass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nUD_Mass.ThousandsSeparator = true;
-            this.nUD_Mass.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.nUD_Mass.Value = new decimal(new int[] {
-            705032704,
-            1,
-            0,
-            0});
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 204);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 20);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Вага, кг:";
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 19);
+            this.toolStripStatusLabel2.Text = "Traces";
+            this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
             // 
             // MainForm
             // 
@@ -556,13 +572,13 @@ namespace MotionSimulation
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_speedY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_speedX)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,6 +620,7 @@ namespace MotionSimulation
         private System.Windows.Forms.Button btn_AddBody;
         private System.Windows.Forms.NumericUpDown nUD_Mass;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 

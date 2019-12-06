@@ -39,17 +39,15 @@ namespace MotionSimulation
 
         public void Add(T item)
         {
-            if (item == null)
-                throw new ArgumentNullException(nameof(item));
-            _items.Insert(0, item);
-            if (_items.Count >= MaxQuantity)
-                _items.RemoveAt(_items.Count - 1);
+            if (item != null)
+            {
+                _items.Insert(0, item);
+                if (_items.Count >= MaxQuantity)
+                    _items.RemoveAt(_items.Count - 1);
+            }
         }
 
-        public void Clear()
-        {
-            _items.Clear();
-        }
+        public void Clear() => _items.Clear();
 
         public T[] GetAll() => _items.ToArray();
     }
