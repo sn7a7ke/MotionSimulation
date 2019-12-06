@@ -179,5 +179,12 @@ namespace MotionSimulation
             if (!timer1.Enabled)
                 FillInForm();
         }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            timer1.Stop();
+            timer1.Dispose();
+            base.OnClosed(e);
+        }
     }
 }
