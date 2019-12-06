@@ -10,6 +10,9 @@ namespace MotionSimulation
     {
         private Canvas _canvas;
         private const int secondsInHour = 3600;
+        private const int hoursInYear = 8766;
+        private const int hoursInMonth = 730;
+        private const int hoursInDay = 24;
         private const int timerInterval = 40;
         private const int framesPerSecond = 1000 / timerInterval;
         private IAstronomicalObject _mainObject;
@@ -87,10 +90,10 @@ namespace MotionSimulation
         private string GetDateFromHours(int numberOfSeconds)
         {
             var hours = numberOfSeconds / secondsInHour;
-            return (hours / 8766).ToString("0") + " р " +
-                    (hours % 8766 / 730).ToString("0") + " м " +
-                    (hours % 730 / 24).ToString("00") + " д " +
-                    (hours % 24).ToString("00") + " г";
+            return (hours / hoursInYear).ToString("0") + " р " +
+                    (hours % hoursInYear / hoursInMonth).ToString("0") + " м " +
+                    (hours % hoursInMonth / hoursInDay).ToString("00") + " д " +
+                    (hours % hoursInDay).ToString("00") + " г";
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
