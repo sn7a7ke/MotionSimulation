@@ -43,7 +43,7 @@ namespace MotionSimulation
                 throw new ArgumentNullException(nameof(item));
             _items.Insert(0, item);
             if (_items.Count >= MaxQuantity)
-                _items.RemoveAt(MaxQuantity - 1);
+                _items.RemoveAt(_items.Count - 1);
         }
 
         public T[] GetAll() => _items.ToArray();
