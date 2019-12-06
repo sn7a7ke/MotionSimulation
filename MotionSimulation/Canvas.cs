@@ -28,7 +28,7 @@ namespace MotionSimulation
 
         public int SecondsFromStart { get; private set; }
         public int QtyPositions { get; set; }
-        public bool ShowTraces { get; set; } = false;
+        public bool ShowTraces { get; set; } = true;
 
         private int _bodyWithTraces;
         public int BodyWithTraces
@@ -48,7 +48,7 @@ namespace MotionSimulation
 
         private readonly Traces<Position> _traces;
 
-        public Canvas(int width, int height, SystemOfBody systemOfBody)
+        public Canvas(int width, int height)
         {
             if (width < 0)
                 throw new ArgumentOutOfRangeException(nameof(width), "Sizes of canvas must be positive");
@@ -56,7 +56,7 @@ namespace MotionSimulation
                 throw new ArgumentOutOfRangeException(nameof(height), "Sizes of canvas must be positive");
             Width = width;
             Height = height;
-            SystemOfBody = systemOfBody ?? throw new ArgumentNullException(nameof(systemOfBody));
+            SystemOfBody = new SystemOfBody();
 
             Scale = GetEstimateScale();
             _scale = Scale;
@@ -67,8 +67,16 @@ namespace MotionSimulation
             SecondsFromStart = 0;
             QtyPositions = 500;
             _traces = new Traces<Position>(QtyPositions);
+        }
+
+        public void AddBody(IAstronomicalObject obj)
+        {
+            if (obj != null)
+                SystemOfBody.AddBody(obj);
+            _traces.Clear();
             BodyWithTraces = SystemOfBody.Count - 1;
         }
+
 
         public void DoStep()
         {
@@ -78,7 +86,6 @@ namespace MotionSimulation
                 if (SystemOfBody.DoStep())
                     Bang();
             _traces.Add(SystemOfBody[BodyWithTraces]?.Position?.Clone());
-            Refresh();
         }
 
         public void Refresh()

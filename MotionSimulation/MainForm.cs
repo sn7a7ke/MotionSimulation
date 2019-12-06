@@ -8,7 +8,6 @@ namespace MotionSimulation
 {
     public partial class MainForm : Form
     {
-        private SystemOfBody _system;
         private Canvas _canvas;
         private const int secondsInHour = 3600;
         private const int timerInterval = 40;
@@ -18,7 +17,6 @@ namespace MotionSimulation
         {
             InitializeComponent();
             Initialize();
-            FillInForm();
             timer1.Interval = timerInterval;
         }
 
@@ -43,19 +41,18 @@ namespace MotionSimulation
                 SpeedVector = new SpeedVector(0, 1023)
             };
 
-
-            _system = new SystemOfBody();
-            _system.AddBody(Earth);
-            _system.AddBody(Moon);
-            _mainObject = _system.Bodies[0];
-            _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height, _system);
+            _mainObject = Earth;
+            _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height);
+            _canvas.AddBody(Earth);
+            _canvas.AddBody(Moon);
             _canvas.Scale.Length = scaleLength;
             _canvas.Scale.Time = (int)(nUD_Time.Value / timerInterval);
-            _canvas.Refresh();
+            FillInForm();
         }
 
         private void FillInForm()
         {
+            _canvas.Refresh();
             pb_Universe.Image = _canvas.MainBmp;
             lbl_Info.Text = "З початку: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
                 GetObjectsInfo(_canvas.SystemOfBody.Bodies);
@@ -95,7 +92,6 @@ namespace MotionSimulation
                     (hours % 24).ToString("00") + " г";
         }
 
-
         private void timer1_Tick(object sender, System.EventArgs e)
         {
             _canvas.DoStep();
@@ -121,7 +117,6 @@ namespace MotionSimulation
         private void nUD_Length_ValueChanged(object sender, System.EventArgs e)
         {
             _canvas.Scale.Length = (double)nUD_Length.Value;
-            _canvas.Refresh();
             FillInForm();
         }
 
@@ -133,7 +128,6 @@ namespace MotionSimulation
         private void btn_ToCenter_Click(object sender, System.EventArgs e)
         {
             _canvas.MoveCenterTo();
-            _canvas.Refresh();
             FillInForm();
         }
 
@@ -171,10 +165,7 @@ namespace MotionSimulation
                 Position = new Position(positionX, positionY),
                 SpeedVector = new SpeedVector(speedX, speedY)
             };
-            _system.AddBody(Asteroid);
-            _canvas.BodyWithTraces = _system.Count - 1;
-            _canvas.ShowTraces = true;
-            _canvas.Refresh();
+            _canvas.AddBody(Asteroid);
             FillInForm();
         }
 
@@ -185,6 +176,8 @@ namespace MotionSimulation
             toolStripStatusLabel2.BorderStyle = 
                 toolStripStatusLabel2.BorderStyle == Border3DStyle.RaisedOuter ? Border3DStyle.SunkenInner : Border3DStyle.RaisedOuter;
             _canvas.ShowTraces = !_canvas.ShowTraces;
+            if (!timer1.Enabled)
+                FillInForm();
         }
     }
 }

@@ -29,9 +29,8 @@ namespace Universe
 
         public void AddBody(IAstronomicalObject obj)
         {
-            if (obj == null)
-                return;
-            Bodies.Add(obj);
+            if (obj != null)
+                Bodies.Add(obj);
         }
 
         public void RemoveBody(IAstronomicalObject obj)
@@ -69,7 +68,7 @@ namespace Universe
             Position massCenter = MassCenter();
             var dx = x - massCenter.X;
             var dy = y - massCenter.Y;
-            for (int i = 0; i < Count; i++)            
+            for (int i = 0; i < Count; i++)
                 Bodies[i].Position.Shift(dx, dy);
         }
 
