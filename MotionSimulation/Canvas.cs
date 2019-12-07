@@ -84,7 +84,10 @@ namespace MotionSimulation
             _scale = Scale;
             for (int i = 0; i < _scale.Time; i++)
                 if (SystemOfBody.DoStep())
+                {
+                    _traces.Add(SystemOfBody.LastCollision);
                     Bang();
+                }
             _traces.Add(SystemOfBody[BodyWithTraces]?.Position?.Clone());
         }
 

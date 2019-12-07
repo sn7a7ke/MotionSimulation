@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Universe
 {
@@ -11,11 +11,14 @@ namespace Universe
         {
             Bodies = new List<IAstronomicalObject>();
             CollisonProcess = new SimplyCollision();
+            LastCollision = null;
         }
 
         public List<IAstronomicalObject> Bodies { get; protected set; }
 
         public int Count => Bodies.Count;
+
+        public Position LastCollision { get; set; }
 
         public IAstronomicalObject this[int index]
         {
@@ -109,6 +112,7 @@ namespace Universe
                 {
                     if (CheckCollision(Bodies[i], Bodies[j]))
                     {
+                        SetLastColision(Bodies[i], Bodies[j]);
                         Collison(Bodies[i], Bodies[j]);
                         return true;
                     }
@@ -116,30 +120,28 @@ namespace Universe
             return false;
         }
 
-        public static bool CheckCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        public bool CheckCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var distance = Position.Distance(obj1.Position, obj2.Position);
-            var twoRadiusSum = obj1.Radius + obj2.Radius;
-            return distance < twoRadiusSum;
+            return distance < (obj1.Radius + obj2.Radius);
+        }
+
+        private void SetLastColision(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        {
+            var distance = Position.Distance(obj1.Position, obj2.Position);
+            var normal = Gravity.NormalVectorFromFirstToSecondBody(obj2, obj1);
+            var distanceToIntersection = (Math.Sqrt(obj2.Radius) + Math.Sqrt(distance) - Math.Sqrt(obj1.Radius)) / (2 * distance);
+            var shiftToIntersection = normal * distanceToIntersection;
+            LastCollision = obj2.Position.Clone();
+            LastCollision.Shift(shiftToIntersection.ProjectionOnX, shiftToIntersection.ProjectionOnY);
         }
 
         private void Collison(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var after = CollisonProcess.Run(obj1, obj2);
-            if (after.Item1 == null)
-                RemoveBody(obj1);
-            else
-                ReplaceBody(obj1, after.Item1);
-            if (after.Item2 == null)
-                RemoveBody(obj2);
-            else
-                ReplaceBody(obj2, after.Item2);
-        }
-
-        private void ReplaceBody(IAstronomicalObject oldObj, IAstronomicalObject newObj)
-        {
-            var index = Bodies.IndexOf(Bodies.First(n => n.Name == oldObj.Name));
-            Bodies[index] = newObj;
+            Bodies.Remove(obj1);
+            Bodies.Remove(obj2);
+            Bodies.AddRange(after);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Universe
             obj2.SpeedVector.Add(power2 * normalVector);
         }
 
-        private static SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        public static SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var dx = obj2.Position.X - obj1.Position.X;
             var dy = obj2.Position.Y - obj1.Position.Y;

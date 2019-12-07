@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Universe
 {
     public interface ICollison
     {
-        Tuple<IAstronomicalObject, IAstronomicalObject> Run(IAstronomicalObject obj1, IAstronomicalObject obj2);
+        List<IAstronomicalObject> Run(IAstronomicalObject obj1, IAstronomicalObject obj2);
     }
 }
