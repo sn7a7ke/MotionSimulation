@@ -73,9 +73,14 @@ namespace MotionSimulation
 
         private string GetObjectInfo(IAstronomicalObject obj)
         {
-            return $"{obj.Name}:\n" +
+            return $"{obj.Name}, R {(obj.Radius / 1000).ToString("# ##0.#")} км, ρ {GetDensity(obj).ToString("0.00")} г/cм³:\n" +
                 $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с\n" +
-                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} тис. км\n";
+                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} т.км\n";
+        }
+
+        private double GetDensity(IAstronomicalObject obj)
+        {
+            return 3 * obj.Mass / (4000 * Math.PI * Math.Pow(obj.Radius, 3));
         }
 
         private string GetSpeedInKilometersPerSecond(double speed)
@@ -167,12 +172,13 @@ namespace MotionSimulation
             var speedY = (double)nUD_speedY.Value;
             var positionX = (double)nUD_positionX.Value;
             var positionY = (double)nUD_positionY.Value;
-            var mass = (double)nUD_Mass.Value;
+            var mass = (double)nUD_Mass.Value * 1000;
+            var radius = (double)nUD_Radius.Value;
             var Asteroid = new AstronomicalObject
             {
                 Name = "Астероїд",
                 Mass = mass,
-                Radius = 1E3,
+                Radius = radius,
                 Position = new Position(positionX, positionY),
                 SpeedVector = new SpeedVector(speedX, speedY)
             };
@@ -184,7 +190,7 @@ namespace MotionSimulation
         {
             toolStripStatusLabel2.Font = new Font(toolStripStatusLabel2.Font,
                 toolStripStatusLabel2.Font.Style == FontStyle.Strikeout ? FontStyle.Regular : FontStyle.Strikeout);
-            toolStripStatusLabel2.BorderStyle = 
+            toolStripStatusLabel2.BorderStyle =
                 toolStripStatusLabel2.BorderStyle == Border3DStyle.RaisedOuter ? Border3DStyle.SunkenInner : Border3DStyle.RaisedOuter;
             _canvas.ShowTraces = !_canvas.ShowTraces;
             if (!timer1.Enabled)

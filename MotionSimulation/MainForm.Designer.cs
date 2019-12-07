@@ -49,6 +49,8 @@ namespace MotionSimulation
             this.btn_IsAbandoned = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nUD_Radius = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.nUD_Mass = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.btn_AddBody = new System.Windows.Forms.Button();
@@ -67,6 +69,7 @@ namespace MotionSimulation
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Length)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_Radius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).BeginInit();
@@ -284,6 +287,8 @@ namespace MotionSimulation
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.nUD_Radius);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.nUD_Mass);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btn_AddBody);
@@ -297,19 +302,55 @@ namespace MotionSimulation
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(1059, 410);
+            this.groupBox1.Location = new System.Drawing.Point(1059, 379);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(212, 273);
+            this.groupBox1.Size = new System.Drawing.Size(212, 304);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Астероїд";
             // 
+            // nUD_Radius
+            // 
+            this.nUD_Radius.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nUD_Radius.Location = new System.Drawing.Point(91, 234);
+            this.nUD_Radius.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nUD_Radius.Maximum = new decimal(new int[] {
+            999000000,
+            0,
+            0,
+            0});
+            this.nUD_Radius.Name = "nUD_Radius";
+            this.nUD_Radius.Size = new System.Drawing.Size(111, 26);
+            this.nUD_Radius.TabIndex = 32;
+            this.nUD_Radius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nUD_Radius.ThousandsSeparator = true;
+            this.nUD_Radius.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nUD_Radius.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 236);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(86, 20);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Радиус, м:";
+            // 
             // nUD_Mass
             // 
             this.nUD_Mass.Increment = new decimal(new int[] {
-            100000000,
+            1000000,
             0,
             0,
             0});
@@ -327,8 +368,8 @@ namespace MotionSimulation
             this.nUD_Mass.ThousandsSeparator = true;
             this.nUD_Mass.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nUD_Mass.Value = new decimal(new int[] {
-            705032704,
-            1,
+            5000000,
+            0,
             0,
             0});
             // 
@@ -338,14 +379,14 @@ namespace MotionSimulation
             this.label4.Location = new System.Drawing.Point(4, 204);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 20);
+            this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 29;
-            this.label4.Text = "Вага, кг:";
+            this.label4.Text = "Вага, т:";
             // 
             // btn_AddBody
             // 
             this.btn_AddBody.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AddBody.Location = new System.Drawing.Point(70, 235);
+            this.btn_AddBody.Location = new System.Drawing.Point(70, 266);
             this.btn_AddBody.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_AddBody.Name = "btn_AddBody";
             this.btn_AddBody.Size = new System.Drawing.Size(132, 30);
@@ -572,6 +613,7 @@ namespace MotionSimulation
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Time)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_Radius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_Mass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_positionX)).EndInit();
@@ -621,6 +663,8 @@ namespace MotionSimulation
         private System.Windows.Forms.NumericUpDown nUD_Mass;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.NumericUpDown nUD_Radius;
+        private System.Windows.Forms.Label label10;
     }
 }
 
