@@ -16,6 +16,7 @@ namespace MotionSimulation
         public int Width { get; set; }
         public int Height { get; set; }
         public Pen Pen { get; private set; }
+        public Pen TracesPen { get; private set; }
         public Bitmap MainBmp { get; private set; }
         public Graphics Graph { get; private set; }
 
@@ -61,6 +62,7 @@ namespace MotionSimulation
             Scale = GetEstimateScale();
             _scale = Scale;
             Pen = new Pen(EdgeColor);
+            TracesPen = new Pen(Color.FromArgb(100, 0, 255, 0));
             //MainBmp = new Bitmap(Width, Height);
             //Graph = Graphics.FromImage(MainBmp);
             Clear();
@@ -120,7 +122,7 @@ namespace MotionSimulation
         {
             var points = PositionsToScreenDots(_traces.GetAll());
             if (points.Length > 1)
-                Graph.DrawCurve(Pen, points);
+                Graph.DrawCurve(TracesPen, points);
         }
 
         private Rectangle GetSquare(IAstronomicalObject obj)
