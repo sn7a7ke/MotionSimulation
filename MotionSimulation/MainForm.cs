@@ -11,14 +11,15 @@ namespace MotionSimulation
     public partial class MainForm : Form
     {
         private Canvas _canvas;
+        private IAstronomicalObject _mainObject;
+        private bool startPreparation = true;
+
         private const int secondsInHour = 3600;
         private const int hoursInYear = 8766;
         private const int hoursInMonth = 730;
         private const int hoursInDay = 24;
         private const int timerInterval = 40;
         private const int framesPerSecond = 1000 / timerInterval;
-        private IAstronomicalObject _mainObject;
-
         private const double minDensity = 0.5;
         private const double maxDensity = 7;
         private readonly string validationWarning = $"Згідно класифікація є три основних типи астероїдів.\nКлас С (1.38 г/см³) — вуглецеві, 75% відомих астероїдів.\nКлас S (2.71 г/см³) — силікатні, 17% відомих астероїдів.\nКлас M (5.32 г/см³)— металеві, більшість інших.\nСамий: легкий метал це Літій 0,53 г/см³, щільний метал це Осмій 22,58 г/см³";
@@ -55,6 +56,7 @@ namespace MotionSimulation
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height);
             _canvas.AddObject(Earth);
             _canvas.AddObject(Moon);
+            _canvas.InProcessObject = GetObjectFromFields();
             _canvas.Scale.Length = scaleLength;
             _canvas.Scale.Time = (int)(nUD_Time.Value / framesPerSecond);
             FillInForm();
@@ -119,12 +121,14 @@ namespace MotionSimulation
                 timer1.Stop();
                 button1.Text = "Розпочати";
                 groupBox1.Enabled = true;
+                startPreparation = true;
             }
             else
             {
                 timer1.Start();
                 button1.Text = "Зупинити";
                 groupBox1.Enabled = false;
+                startPreparation = false;
             }
         }
 
@@ -170,13 +174,27 @@ namespace MotionSimulation
 
         private void btn_AddBody_Click(object sender, EventArgs e)
         {
+            IAstronomicalObject Asteroid = _canvas.InProcessObject;
+            var density = Asteroid.GetDensity();
+            if (!Validation(Asteroid))
+            {
+                var result = MessageBox.Show(
+                    validationWarning + $"\n\nСтворити астероїд з щільністю {density.ToString("# ##0.0##")} г/см³?\nЩоб продовжити редагування оберіть <Нет>.", "Попередження", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                    return;
+            }
+            _canvas.AddInProcessObject();
+            FillInForm();
+        }
+
+        private IAstronomicalObject GetObjectFromFields()
+        {
             var speedX = (double)nUD_speedX.Value;
             var speedY = (double)nUD_speedY.Value;
             var positionX = (double)nUD_positionX.Value;
             var positionY = (double)nUD_positionY.Value;
             var mass = (double)nUD_Mass.Value * 1000;
             var radius = (double)nUD_Radius.Value;
-            var density = AstronomicalObject.GetDensity(mass, radius);
             var Asteroid = new AstronomicalObject
             (
                 name: "Астероїд",
@@ -185,15 +203,7 @@ namespace MotionSimulation
                 position: new Position(positionX, positionY),
                 speedVector: new Vector(speedX, speedY)
             );
-            if (!Validation(Asteroid))
-            {
-                var result = MessageBox.Show(
-                    validationWarning + $"\n\nСтворити астероїд з щільністю {density.ToString("# ##0.0##")} г/см³?\nЩоб продовжити редагування оберіть <Нет>.", "Попередження", MessageBoxButtons.YesNo);
-                if (result == DialogResult.No)
-                    return;
-            }
-            _canvas.AddObject(Asteroid);
-            FillInForm();
+            return Asteroid;
         }
 
         public bool Validation(IAstronomicalObject obj) => obj.GetDensity() >= minDensity && obj.GetDensity() <= maxDensity;
@@ -235,6 +245,25 @@ namespace MotionSimulation
             timer1.Stop();
             timer1.Dispose();
             base.OnClosed(e);
+        }
+
+        private void pb_Universe_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs em = (MouseEventArgs)e;
+            if (startPreparation)
+            {
+                var position = _canvas.ScreenDotToPosition(em.X, em.Y);
+                nUD_positionX.Value = (decimal)position.X;
+                nUD_positionY.Value = (decimal)position.Y;
+                _canvas.InProcessObject = GetObjectFromFields();
+                FillInForm();
+            }
+        }
+
+        private void AsteroidValueChanged(object sender, EventArgs e)
+        {
+            _canvas.InProcessObject = GetObjectFromFields();
+            FillInForm();
         }
     }
 }

@@ -16,8 +16,8 @@ namespace MotionSimulation
 
         public int Width { get; set; }
         public int Height { get; set; }
-        public Pen Pen { get; private set; }
-        public Pen TracesPen { get; private set; }
+        public Pen Pen { get; set; }
+        public Pen TracesPen { get; set; }
         public Bitmap MainBmp { get; private set; }
         public Graphics Graph { get; private set; }
         public Scale Scale { get; set; }
@@ -29,6 +29,8 @@ namespace MotionSimulation
         public int SecondsFromStart { get; private set; }
         public int QtyPositions { get; set; }
         public bool ShowTraces { get; set; } = true;
+
+        public IAstronomicalObject InProcessObject = null;
 
         private int _bodyWithTraces;
         public int BodyWithTraces
@@ -78,6 +80,13 @@ namespace MotionSimulation
             BodyWithTraces = systemOfBody.Count - 1;
         }
 
+        public void AddInProcessObject()
+        {
+            AddObject(InProcessObject);
+            InProcessObject = null;
+        }
+
+
         public List<IAstronomicalObject> GetAllObject() => systemOfBody.Bodies;
 
         public bool DoStep()
@@ -102,6 +111,8 @@ namespace MotionSimulation
                 DrawBody(systemOfBody[i]);
             if (ShowTraces)
                 DrawTraces();
+            if (InProcessObject != null)
+                DrawBody(InProcessObject);
         }
 
         private void DrawBody(IAstronomicalObject obj)
@@ -150,6 +161,13 @@ namespace MotionSimulation
             var X = (int)(position.X / _scale.Length) + _offsetCenter.X;
             var Y = (int)(position.Y / _scale.Length) + _offsetCenter.Y;
             return new Point(X, Y);
+        }
+
+        public Position ScreenDotToPosition(int x, int y)
+        {
+            var X = (x - _offsetCenter.X) * _scale.Length;
+            var Y = (y - _offsetCenter.Y) * _scale.Length;
+            return new Position(X, Y);
         }
 
         private void Clear()

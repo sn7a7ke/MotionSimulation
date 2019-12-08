@@ -133,6 +133,7 @@ namespace MotionSimulation
             this.pb_Universe.Size = new System.Drawing.Size(1051, 856);
             this.pb_Universe.TabIndex = 2;
             this.pb_Universe.TabStop = false;
+            this.pb_Universe.Click += new System.EventHandler(this.pb_Universe_Click);
             this.pb_Universe.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_Universe_MouseMove);
             this.pb_Universe.Resize += new System.EventHandler(this.pb_Universe_Resize);
             // 
@@ -341,6 +342,7 @@ namespace MotionSimulation
             0,
             0,
             0});
+            this.nUD_Radius.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // label10
             // 
@@ -382,6 +384,7 @@ namespace MotionSimulation
             0,
             0,
             0});
+            this.nUD_Mass.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // label4
             // 
@@ -415,13 +418,13 @@ namespace MotionSimulation
             this.nUD_positionY.Location = new System.Drawing.Point(48, 169);
             this.nUD_positionY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_positionY.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
+            2043514880,
+            2095,
             0,
             0});
             this.nUD_positionY.Minimum = new decimal(new int[] {
-            1000000000,
-            0,
+            2043514880,
+            2095,
             0,
             -2147483648});
             this.nUD_positionY.Name = "nUD_positionY";
@@ -435,6 +438,7 @@ namespace MotionSimulation
             0,
             0,
             0});
+            this.nUD_positionY.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // nUD_positionX
             // 
@@ -446,13 +450,13 @@ namespace MotionSimulation
             this.nUD_positionX.Location = new System.Drawing.Point(48, 136);
             this.nUD_positionX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_positionX.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
+            2043514880,
+            2095,
             0,
             0});
             this.nUD_positionX.Minimum = new decimal(new int[] {
-            1000000000,
-            0,
+            2043514880,
+            2095,
             0,
             -2147483648});
             this.nUD_positionX.Name = "nUD_positionX";
@@ -466,6 +470,7 @@ namespace MotionSimulation
             0,
             0,
             0});
+            this.nUD_positionX.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // nUD_speedY
             // 
@@ -477,12 +482,12 @@ namespace MotionSimulation
             this.nUD_speedY.Location = new System.Drawing.Point(48, 80);
             this.nUD_speedY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_speedY.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
             this.nUD_speedY.Minimum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             -2147483648});
@@ -497,6 +502,7 @@ namespace MotionSimulation
             0,
             0,
             -2147483648});
+            this.nUD_speedY.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // nUD_speedX
             // 
@@ -508,12 +514,12 @@ namespace MotionSimulation
             this.nUD_speedX.Location = new System.Drawing.Point(48, 47);
             this.nUD_speedX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nUD_speedX.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
             this.nUD_speedX.Minimum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             -2147483648});
@@ -528,6 +534,7 @@ namespace MotionSimulation
             0,
             0,
             -2147483648});
+            this.nUD_speedX.ValueChanged += new System.EventHandler(this.AsteroidValueChanged);
             // 
             // label7
             // 
