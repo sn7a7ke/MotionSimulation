@@ -20,6 +20,8 @@ namespace Universe
             Y += dy;
         }
 
+        public double Distance(Position pos) => Distance(this, pos);
+
         public static double Distance(Position pos1, Position pos2)
         {
             var dx = pos1.X - pos2.X;

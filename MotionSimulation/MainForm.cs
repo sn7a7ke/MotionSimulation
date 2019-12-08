@@ -79,14 +79,14 @@ namespace MotionSimulation
         {
             return $"{obj.Name}, R {(obj.Radius / 1000).ToString("# ##0.#")} км, ρ {obj.GetDensity().ToString("0.00")} г/cм³:\n" +
                 $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с\n" +
-                $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} т.км\n";
+                $"   - відстань {GetDistanceInKilometers(_mainObject, obj)} т.км\n";
         }
 
         private string GetSpeedInKilometersPerSecond(double speed) => (speed / 1000).ToString("0.00");
 
-        private string GetDistanceInKilometers(Position pos1, Position pos2)
+        private string GetDistanceInKilometers(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-            return (Position.Distance(pos1, pos2) / 1E6).ToString("# ###");
+            return (obj1.Distance(obj2) / 1E6).ToString("# ###");
         }
 
         private string GetDateFromHours(int numberOfSeconds)

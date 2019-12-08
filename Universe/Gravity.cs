@@ -8,7 +8,7 @@ namespace Universe
 
         public static double FirstSpaceVelocity(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
         {
-            var distance = Position.Distance(bigObj.Position, smallObj.Position);
+            var distance = bigObj.Distance(smallObj);
             var firstSpeed = Math.Sqrt(GravitationalConstant * bigObj.Mass / distance);
             return firstSpeed;
         }
@@ -21,7 +21,7 @@ namespace Universe
 
         public static double AttractivePower(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-            var length = Position.Distance(obj1.Position, obj2.Position);
+            var length = obj1.Distance(obj2);
             var power = GravitationalConstant * (obj1.Mass / length) * (obj2.Mass / length);
             return power;
         }
@@ -29,7 +29,7 @@ namespace Universe
         public static void ChangeAccelerationVectors(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var normalVector = NormalVectorFromFirstToSecondBody(obj1, obj2);
-            var length = Position.Distance(obj1.Position, obj2.Position);
+            var length = obj1.Distance(obj2);
             var lengthSquare = length * length;
             var power1 = GravitationalConstant * obj2.Mass / lengthSquare;
             var power2 = -GravitationalConstant * obj1.Mass / lengthSquare;
@@ -41,7 +41,7 @@ namespace Universe
         {
             var dx = obj2.Position.X - obj1.Position.X;
             var dy = obj2.Position.Y - obj1.Position.Y;
-            var length = Position.Distance(obj1.Position, obj2.Position);
+            var length = obj1.Distance(obj2);
             var nv = new SpeedVector(dx / length, dy / length);
             return nv;
         }

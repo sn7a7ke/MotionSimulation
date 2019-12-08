@@ -15,5 +15,7 @@
         void Move();
 
         double GetDensity();
+
+        double Distance(IAstronomicalObject obj);
     }
 }

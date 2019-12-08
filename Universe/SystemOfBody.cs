@@ -122,13 +122,13 @@ namespace Universe
 
         public bool CheckCollision(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-            var distance = Position.Distance(obj1.Position, obj2.Position);
+            var distance = obj1.Distance(obj2);
             return distance < (obj1.Radius + obj2.Radius);
         }
 
         private void SetLastColision(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
-            var distance = Position.Distance(obj1.Position, obj2.Position);
+            var distance = obj1.Distance(obj2);
             var normal = Gravity.NormalVectorFromFirstToSecondBody(obj2, obj1);
             var distanceToIntersection = (Math.Sqrt(obj2.Radius) + Math.Sqrt(distance) - Math.Sqrt(obj1.Radius)) / (2 * distance);
             var shiftToIntersection = normal * distanceToIntersection;

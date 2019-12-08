@@ -42,5 +42,7 @@ namespace Universe
         public double GetDensity() => GetDensity(Mass, Radius);
 
         public static double GetDensity(double mass, double radius) => 3 * mass / (4000 * Math.PI * Math.Pow(radius, 3));
+
+        public double Distance(IAstronomicalObject obj) => Position.Distance(obj.Position);
     }
 }
