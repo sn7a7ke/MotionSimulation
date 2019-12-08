@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Universe;
@@ -106,7 +107,8 @@ namespace MotionSimulation
 
         private void timer1_Tick(object sender, System.EventArgs e)
         {
-            _canvas.DoStep();
+            if (_canvas.DoStep())
+                Bang();
             FillInForm();
         }
 
@@ -156,8 +158,11 @@ namespace MotionSimulation
 
         private void btn_IsAbandoned_Click(object sender, EventArgs e)
         {
-            if (_canvas.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]))
+            if (Gravity.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]))
+            {
                 btn_IsAbandoned.ForeColor = Color.Red;
+                Abandoned();
+            }
             else
                 btn_IsAbandoned.ForeColor = Color.ForestGreen;
         }
@@ -201,6 +206,27 @@ namespace MotionSimulation
             _canvas.ShowTraces = !_canvas.ShowTraces;
             if (!timer1.Enabled)
                 FillInForm();
+        }
+
+        private void Bang()
+        {
+            PlayWavFile("Bang.wav");
+        }
+
+        private void Abandoned()
+        {
+            PlayWavFile("Funeral.wav");
+        }
+
+        private static void PlayWavFile(string wav)
+        {
+            if (!File.Exists(wav))
+                return;
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+            sp.SoundLocation = wav;
+            sp.Load();
+            sp.Play();
+            sp.Dispose();
         }
 
         protected override void OnClosed(EventArgs e)

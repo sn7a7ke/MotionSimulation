@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using Universe;
 
 namespace MotionSimulation
@@ -80,7 +79,7 @@ namespace MotionSimulation
         }
 
 
-        public void DoStep()
+        public bool DoStep()
         {
             SecondsFromStart += _scale.Time;
             _scale = Scale;
@@ -88,9 +87,10 @@ namespace MotionSimulation
                 if (SystemOfBody.DoStep())
                 {
                     _traces.Add(SystemOfBody.LastCollision);
-                    Bang();
+                    return true;
                 }
             _traces.Add(SystemOfBody[BodyWithTraces]?.Position?.Clone());
+            return false;
         }
 
         public void Refresh()
@@ -161,10 +161,7 @@ namespace MotionSimulation
             Graph = Graphics.FromImage(MainBmp);
         }
 
-        public Scale GetEstimateScale()
-        {
-            return new Scale(1E6, 60 * 60, 1);
-        }
+        public Scale GetEstimateScale() => new Scale(1E6, 60 * 60, 1);
 
         public Point MoveCenterTo()
         {
@@ -177,36 +174,6 @@ namespace MotionSimulation
             var dy = y - (int)(massCenter.Y / _scale.Length);
             _offsetCenter = new Point(dx, dy);
             return _offsetCenter;
-        }
-
-        public bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
-        {
-            var secondSpeed = Gravity.SecondSpaceVelocity(bigObj, smallObj);
-            var check = smallObj.SpeedVector.Speed >= secondSpeed;
-            if (check)
-                Abandoned();
-            return check;
-        }
-
-        private void Bang()
-        {
-            PlayWavFile("Bang.wav");
-        }
-
-        private void Abandoned()
-        {
-            PlayWavFile("Funeral.wav");
-        }
-
-        private static void PlayWavFile(string wav)
-        {
-            if (!File.Exists(wav))
-                return;
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
-            sp.SoundLocation = wav;
-            sp.Load();
-            sp.Play();
-            sp.Dispose();
         }
     }
 }

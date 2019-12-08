@@ -45,5 +45,12 @@ namespace Universe
             var nv = new Vector(dx / length, dy / length);
             return nv;
         }
+
+        public static bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
+        {
+            var secondSpeed = Gravity.SecondSpaceVelocity(bigObj, smallObj);
+            var check = smallObj.SpeedVector.Speed >= secondSpeed;
+            return check;
+        }
     }
 }
