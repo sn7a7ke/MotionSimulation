@@ -53,8 +53,8 @@ namespace MotionSimulation
 
             _mainObject = Earth;
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height);
-            _canvas.AddBody(Earth);
-            _canvas.AddBody(Moon);
+            _canvas.AddObject(Earth);
+            _canvas.AddObject(Moon);
             _canvas.Scale.Length = scaleLength;
             _canvas.Scale.Time = (int)(nUD_Time.Value / framesPerSecond);
             FillInForm();
@@ -65,7 +65,7 @@ namespace MotionSimulation
             _canvas.Refresh();
             pb_Universe.Image = _canvas.MainBmp;
             lbl_Info.Text = "З початку: " + GetDateFromHours(_canvas.SecondsFromStart) + "\n" +
-                GetObjectsInfo(_canvas.SystemOfBody.Bodies);
+                GetObjectsInfo(_canvas.GetAllObject());
         }
 
         private string GetObjectsInfo(List<IAstronomicalObject> objList)
@@ -79,7 +79,7 @@ namespace MotionSimulation
         private string GetObjectInfo(IAstronomicalObject obj)
         {
             return $"{obj.Name}, R {(obj.Radius / 1000).ToString("# ##0.#")} км, ρ {obj.GetDensity().ToString("0.00")} г/cм³:\n" +
-                $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с\n" +
+                $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Length)} км/с\n" +
                 $"   - відстань {GetDistanceInKilometers(_mainObject, obj)} т.км\n";
         }
 
@@ -158,7 +158,8 @@ namespace MotionSimulation
 
         private void btn_IsAbandoned_Click(object sender, EventArgs e)
         {
-            if (Gravity.IsAbandoned(_canvas.SystemOfBody[0], _canvas.SystemOfBody[_canvas.SystemOfBody.Count - 1]))
+            var result = Gravity.IsAbandoned(_canvas.GetAllObject());
+            if (result.Count != 0)
             {
                 btn_IsAbandoned.ForeColor = Color.Red;
                 Abandoned();
@@ -191,7 +192,7 @@ namespace MotionSimulation
                 if (result == DialogResult.No)
                     return;
             }
-            _canvas.AddBody(Asteroid);
+            _canvas.AddObject(Asteroid);
             FillInForm();
         }
 

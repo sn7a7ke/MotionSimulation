@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Universe;
@@ -11,6 +12,7 @@ namespace MotionSimulation
         private int _width;
         private int _height;
         private Point _offsetCenter;
+        private readonly SystemOfBody systemOfBody;
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -18,8 +20,6 @@ namespace MotionSimulation
         public Pen TracesPen { get; private set; }
         public Bitmap MainBmp { get; private set; }
         public Graphics Graph { get; private set; }
-
-        public SystemOfBody SystemOfBody { get; private set; }
         public Scale Scale { get; set; }
         public Point Center { get; set; }
         public int MinBodySize { get; set; } = 2;
@@ -36,7 +36,7 @@ namespace MotionSimulation
             get => _bodyWithTraces;
             set
             {
-                if (value < 0 || value >= SystemOfBody.Count)
+                if (value < 0 || value >= systemOfBody.Count)
                     throw new ArgumentOutOfRangeException(nameof(value));
                 if (value != _bodyWithTraces)
                 {
@@ -56,7 +56,7 @@ namespace MotionSimulation
                 throw new ArgumentOutOfRangeException(nameof(height), "Sizes of canvas must be positive");
             Width = width;
             Height = height;
-            SystemOfBody = new SystemOfBody();
+            systemOfBody = new SystemOfBody();
 
             Scale = GetEstimateScale();
             _scale = Scale;
@@ -70,26 +70,27 @@ namespace MotionSimulation
             _traces = new Traces<Position>(QtyPositions);
         }
 
-        public void AddBody(IAstronomicalObject obj)
+        public void AddObject(IAstronomicalObject obj)
         {
             if (obj != null)
-                SystemOfBody.AddBody(obj);
+                systemOfBody.AddBody(obj);
             _traces.Clear();
-            BodyWithTraces = SystemOfBody.Count - 1;
+            BodyWithTraces = systemOfBody.Count - 1;
         }
 
+        public List<IAstronomicalObject> GetAllObject() => systemOfBody.Bodies;
 
         public bool DoStep()
         {
             SecondsFromStart += _scale.Time;
             _scale = Scale;
             for (int i = 0; i < _scale.Time; i++)
-                if (SystemOfBody.DoStep())
+                if (systemOfBody.DoStep())
                 {
-                    _traces.Add(SystemOfBody.LastCollision);
+                    _traces.Add(systemOfBody.LastCollision);
                     return true;
                 }
-            _traces.Add(SystemOfBody[BodyWithTraces]?.Position?.Clone());
+            _traces.Add(systemOfBody[BodyWithTraces]?.Position?.Clone());
             return false;
         }
 
@@ -97,8 +98,8 @@ namespace MotionSimulation
         {
             Clear();
             MoveCenterTo();
-            for (int i = 0; i < SystemOfBody.Count; i++)
-                DrawBody(SystemOfBody[i]);
+            for (int i = 0; i < systemOfBody.Count; i++)
+                DrawBody(systemOfBody[i]);
             if (ShowTraces)
                 DrawTraces();
         }
@@ -169,7 +170,7 @@ namespace MotionSimulation
         }
         public Point MoveCenterTo(int x, int y)
         {
-            Position massCenter = SystemOfBody.MassCenter();
+            Position massCenter = systemOfBody.MassCenter();
             var dx = x - (int)(massCenter.X / _scale.Length);
             var dy = y - (int)(massCenter.Y / _scale.Length);
             _offsetCenter = new Point(dx, dy);

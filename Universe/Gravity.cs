@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Universe
 {
@@ -48,9 +49,33 @@ namespace Universe
 
         public static bool IsAbandoned(IAstronomicalObject bigObj, IAstronomicalObject smallObj)
         {
-            var secondSpeed = Gravity.SecondSpaceVelocity(bigObj, smallObj);
-            var check = smallObj.SpeedVector.Speed >= secondSpeed;
-            return check;
+            var vectorToBigObj = new Vector(bigObj.Position.X - smallObj.Position.X, bigObj.Position.Y - smallObj.Position.Y);
+            var cosine = vectorToBigObj.Cosine(smallObj.SpeedVector);
+            if (cosine > 0)
+                return false;
+            var secondSpeed = SecondSpaceVelocity(bigObj, smallObj);
+            return smallObj.SpeedVector.Length >= secondSpeed;
+        }
+
+        public static List<IAstronomicalObject> IsAbandoned(List<IAstronomicalObject> objs)
+        {
+            var abandoned = new List<IAstronomicalObject>();
+            bool currentIsAbandoned;
+            for (int i = objs.Count - 1; i >= 1; i--)
+            {
+                currentIsAbandoned = true;
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    if (!IsAbandoned(objs[j], objs[i]))
+                    {
+                        currentIsAbandoned = false;
+                        break;
+                    }
+                }
+                if (currentIsAbandoned)
+                    abandoned.Add(objs[i]);
+            }
+            return abandoned;
         }
     }
 }

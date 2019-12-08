@@ -14,11 +14,11 @@ namespace Universe
 
         public double Y { get; set; }
 
-        public double Speed => Length(X, Y);
+        public double Length => Math.Sqrt(X * X + Y * Y);
 
-        public Vector Add(Vector vector)
+        public Vector Add(Vector vec)
         {
-            Add(vector.X, vector.Y);
+            Add(vec.X, vec.Y);
             return this;
         }
 
@@ -29,12 +29,16 @@ namespace Universe
             return this;
         }
 
+        public double Cosine(Vector vec) => Cosine(this, vec);
+
+        public static double Cosine(Vector vec1, Vector vec2)
+        {
+            return (vec1.X * vec2.X + vec1.Y * vec2.Y) / (vec1.Length * vec2.Length);
+        }
         public static Vector operator +(Vector vec1, Vector vec2) => new Vector(vec1.X + vec2.X, vec1.Y + vec2.Y);
 
         public static Vector operator *(Vector vec1, double koef) => new Vector(vec1.X * koef, vec1.Y * koef);
 
         public static Vector operator *(double koef, Vector vec1) => vec1 * koef;
-
-        public static double Length(double x, double y) => Math.Sqrt(x * x + y * y);
     }
 }
