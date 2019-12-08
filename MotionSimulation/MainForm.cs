@@ -125,6 +125,12 @@ namespace MotionSimulation
             }
             else
             {
+                if (_canvas.CountOfBody <= 2)
+                {
+                    var result = MessageBox.Show("Ви маєте лише два тіла. Розпочати?", "Попередження", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No)
+                        return;
+                }
                 timer1.Start();
                 button1.Text = "Зупинити";
                 groupBox1.Enabled = false;

@@ -22,6 +22,7 @@ namespace MotionSimulation
         public Graphics Graph { get; private set; }
         public Scale Scale { get; set; }
         public Point Center { get; set; }
+        public int CountOfBody => systemOfBody.Count;
         public int MinBodySize { get; set; } = 2;
         public Color EdgeColor { get; set; } = Color.FromArgb(255, 0, 255, 255);
         public Color CenterColor { get; set; } = Color.FromArgb(255, 0, 0, 255);
