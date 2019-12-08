@@ -325,6 +325,11 @@ namespace MotionSimulation
             0,
             0,
             0});
+            this.nUD_Radius.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nUD_Radius.Name = "nUD_Radius";
             this.nUD_Radius.Size = new System.Drawing.Size(111, 26);
             this.nUD_Radius.TabIndex = 32;
@@ -359,6 +364,11 @@ namespace MotionSimulation
             this.nUD_Mass.Maximum = new decimal(new int[] {
             215752192,
             23,
+            0,
+            0});
+            this.nUD_Mass.Minimum = new decimal(new int[] {
+            1,
+            0,
             0,
             0});
             this.nUD_Mass.Name = "nUD_Mass";

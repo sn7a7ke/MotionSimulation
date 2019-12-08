@@ -18,6 +18,10 @@ namespace MotionSimulation
         private const int framesPerSecond = 1000 / timerInterval;
         private IAstronomicalObject _mainObject;
 
+        private const double minDensity = 0.5;
+        private const double maxDensity = 7;
+        private readonly string validationWarning = $"Згідно класифікація є три основних типи астероїдів.\nКлас С (1.38 г/см³) — вуглецеві, 75% відомих астероїдів.\nКлас S (2.71 г/см³) — силікатні, 17% відомих астероїдів.\nКлас M (5.32 г/см³)— металеві, більшість інших.\nСамий: легкий метал це Літій 0,53 г/см³, щільний метал це Осмій 22,58 г/см³";
+
         public MainForm()
         {
             InitializeComponent();
@@ -30,21 +34,21 @@ namespace MotionSimulation
             var scaleLength = (double)nUD_Length.Value;
 
             var Earth = new AstronomicalObject
-            {
-                Name = "Земля",
-                Mass = 5.9726E24,
-                Radius = 6.371E6,
-                Position = new Position(4E8, 4E8),
-                SpeedVector = new SpeedVector(0, -12.6)
-            };
+            (
+                name: "Земля",
+                mass: 5.9726E24,
+                radius: 6.371E6,
+                position: new Position(4E8, 4E8),
+                speedVector: new SpeedVector(0, -12.6)
+            );
             var Moon = new AstronomicalObject
-            {
-                Name = "Місяць",
-                Mass = 7.3477E22,
-                Radius = 1.737E6,
-                Position = new Position(7.84467E8, 4E8),
-                SpeedVector = new SpeedVector(0, 1023)
-            };
+            (
+                name: "Місяць",
+                mass: 7.3477E22,
+                radius: 1.737E6,
+                position: new Position(7.84467E8, 4E8),
+                speedVector: new SpeedVector(0, 1023)
+            );
 
             _mainObject = Earth;
             _canvas = new Canvas(pb_Universe.Width, pb_Universe.Height);
@@ -73,20 +77,12 @@ namespace MotionSimulation
 
         private string GetObjectInfo(IAstronomicalObject obj)
         {
-            return $"{obj.Name}, R {(obj.Radius / 1000).ToString("# ##0.#")} км, ρ {GetDensity(obj).ToString("0.00")} г/cм³:\n" +
+            return $"{obj.Name}, R {(obj.Radius / 1000).ToString("# ##0.#")} км, ρ {obj.GetDensity().ToString("0.00")} г/cм³:\n" +
                 $"   - швидкість    {GetSpeedInKilometersPerSecond(obj.SpeedVector.Speed)} км/с\n" +
                 $"   - відстань {GetDistanceInKilometers(_mainObject.Position, obj.Position)} т.км\n";
         }
 
-        private double GetDensity(IAstronomicalObject obj)
-        {
-            return 3 * obj.Mass / (4000 * Math.PI * Math.Pow(obj.Radius, 3));
-        }
-
-        private string GetSpeedInKilometersPerSecond(double speed)
-        {
-            return (speed / 1000).ToString("0.00");
-        }
+        private string GetSpeedInKilometersPerSecond(double speed) => (speed / 1000).ToString("0.00");
 
         private string GetDistanceInKilometers(Position pos1, Position pos2)
         {
@@ -174,17 +170,27 @@ namespace MotionSimulation
             var positionY = (double)nUD_positionY.Value;
             var mass = (double)nUD_Mass.Value * 1000;
             var radius = (double)nUD_Radius.Value;
+            var density = AstronomicalObject.GetDensity(mass, radius);
             var Asteroid = new AstronomicalObject
+            (
+                name: "Астероїд",
+                mass: mass,
+                radius: radius,
+                position: new Position(positionX, positionY),
+                speedVector: new SpeedVector(speedX, speedY)
+            );
+            if (!Validation(Asteroid))
             {
-                Name = "Астероїд",
-                Mass = mass,
-                Radius = radius,
-                Position = new Position(positionX, positionY),
-                SpeedVector = new SpeedVector(speedX, speedY)
-            };
+                var result = MessageBox.Show(
+                    validationWarning + $"\n\nСтворити астероїд з щільністю {density.ToString("# ##0.0##")} г/см³?\nЩоб продовжити редагування оберіть <Нет>.", "Попередження", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                    return;
+            }
             _canvas.AddBody(Asteroid);
             FillInForm();
         }
+
+        public bool Validation(IAstronomicalObject obj) => obj.GetDensity() >= minDensity && obj.GetDensity() <= maxDensity;
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {

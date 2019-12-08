@@ -2,16 +2,18 @@
 {
     public interface IAstronomicalObject
     {
-        double Mass { get; set; }
+        string Name { get; }
 
-        string Name { get; set; }
+        double Mass { get; }
 
-        Position Position { get; set; }
+        double Radius { get; }
 
-        double Radius { get; set; }
+        Position Position { get; }
 
         SpeedVector SpeedVector { get; set; }
 
         void Move();
+
+        double GetDensity();
     }
 }
