@@ -10,7 +10,7 @@
 
         Position Position { get; }
 
-        SpeedVector SpeedVector { get; set; }
+        Vector SpeedVector { get; set; }
 
         void Move();
 

@@ -37,12 +37,12 @@ namespace Universe
             obj2.SpeedVector.Add(power2 * normalVector);
         }
 
-        public static SpeedVector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
+        public static Vector NormalVectorFromFirstToSecondBody(IAstronomicalObject obj1, IAstronomicalObject obj2)
         {
             var dx = obj2.Position.X - obj1.Position.X;
             var dy = obj2.Position.Y - obj1.Position.Y;
             var length = obj1.Distance(obj2);
-            var nv = new SpeedVector(dx / length, dy / length);
+            var nv = new Vector(dx / length, dy / length);
             return nv;
         }
     }

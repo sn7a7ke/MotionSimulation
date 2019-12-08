@@ -75,20 +75,20 @@ namespace Universe
                 Bodies[i].Position.Shift(dx, dy);
         }
 
-        public SpeedVector MassSpeedVector()
+        public Vector MassSpeedVector()
         {
             double dx = 0;
             double dy = 0;
             double dm = 0;
             for (int i = 0; i < Count; i++)
             {
-                dx += Bodies[i].SpeedVector.ProjectionOnX * Bodies[i].Mass;
-                dy += Bodies[i].SpeedVector.ProjectionOnY * Bodies[i].Mass;
+                dx += Bodies[i].SpeedVector.X * Bodies[i].Mass;
+                dy += Bodies[i].SpeedVector.Y * Bodies[i].Mass;
                 dm += Bodies[i].Mass;
             }
             dx = dx / dm;
             dy = dy / dm;
-            return new SpeedVector(dx, dy);
+            return new Vector(dx, dy);
         }
 
         private void Move()
@@ -133,7 +133,7 @@ namespace Universe
             var distanceToIntersection = (Math.Sqrt(obj2.Radius) + Math.Sqrt(distance) - Math.Sqrt(obj1.Radius)) / (2 * distance);
             var shiftToIntersection = normal * distanceToIntersection;
             LastCollision = obj2.Position.Clone();
-            LastCollision.Shift(shiftToIntersection.ProjectionOnX, shiftToIntersection.ProjectionOnY);
+            LastCollision.Shift(shiftToIntersection.X, shiftToIntersection.Y);
         }
 
         private void Collison(IAstronomicalObject obj1, IAstronomicalObject obj2)

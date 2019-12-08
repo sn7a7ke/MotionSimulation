@@ -7,7 +7,7 @@ namespace Universe
     /// </summary>
     public class AstronomicalObject : IAstronomicalObject
     {
-        public AstronomicalObject(string name, double mass, double radius, Position position, SpeedVector speedVector)
+        public AstronomicalObject(string name, double mass, double radius, Position position, Vector speedVector)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
 
@@ -32,11 +32,11 @@ namespace Universe
 
         public Position Position { get; private set; }
 
-        public SpeedVector SpeedVector { get; set; }
+        public Vector SpeedVector { get; set; }
 
         public void Move()
         {
-            Position.Shift(SpeedVector.ProjectionOnX, SpeedVector.ProjectionOnY);
+            Position.Shift(SpeedVector.X, SpeedVector.Y);
         }
 
         public double GetDensity() => GetDensity(Mass, Radius);

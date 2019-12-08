@@ -39,7 +39,7 @@ namespace MotionSimulation
                 mass: 5.9726E24,
                 radius: 6.371E6,
                 position: new Position(4E8, 4E8),
-                speedVector: new SpeedVector(0, -12.6)
+                speedVector: new Vector(0, -12.6)
             );
             var Moon = new AstronomicalObject
             (
@@ -47,7 +47,7 @@ namespace MotionSimulation
                 mass: 7.3477E22,
                 radius: 1.737E6,
                 position: new Position(7.84467E8, 4E8),
-                speedVector: new SpeedVector(0, 1023)
+                speedVector: new Vector(0, 1023)
             );
 
             _mainObject = Earth;
@@ -177,7 +177,7 @@ namespace MotionSimulation
                 mass: mass,
                 radius: radius,
                 position: new Position(positionX, positionY),
-                speedVector: new SpeedVector(speedX, speedY)
+                speedVector: new Vector(speedX, speedY)
             );
             if (!Validation(Asteroid))
             {
